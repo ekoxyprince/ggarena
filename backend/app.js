@@ -1,0 +1,45 @@
+import express from "express";
+import bodyParser from "body-parser";
+import logger from "morgan";
+import compression from "compression";
+import helmet from "helmet";
+import authRoutes from "./routes/auth.js";
+import auth from "./middlewares/auth.js";
+import gameRoutes from "./routes/game.js";
+import platformRoutes from "./routes/platform.js";
+import communityRoutes from "./routes/community.js";
+import tournamentRoutes from "./routes/tournament.js";
+import userRoutes from "./routes/user.js";
+import corsOptions from "./config/corsOptions.js";
+import cors from "cors";
+
+const app = express();
+
+app.use(compression());
+app.use(helmet());
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors(corsOptions));
+app.use(logger("dev"));
+
+app.use("/api/auth", authRoutes);
+app.use("/api/platforms", auth, platformRoutes);
+app.use("/api/games", auth, gameRoutes);
+app.use("/api/communities", auth, communityRoutes);
+app.use("/api/tournaments", auth, tournamentRoutes);
+app.use("/api/user", auth, userRoutes);
+app.use((req, res) => {
+  res.status(404).json({ success: false, message: "Not found!" });
+});
+app.use((err, req, res, next) => {
+  if (typeof err.code == "number" && err.code < 500) {
+    return res.status(err.code).json({ success: false, message: err.message });
+  }
+  console.log(err);
+  return res
+    .status(500)
+    .json({ success: false, message: "Internal server error" });
+});
+
+export default app;
