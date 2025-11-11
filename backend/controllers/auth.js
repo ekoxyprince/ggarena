@@ -6,10 +6,15 @@ import catchAsync from "../utils/catchAsync.js";
 
 export const signinUser = catchAsync(async (req, res) => {
   const { email, password } = req.body;
-  const token = await signin(email, password);
+  const { token, role } = await signin(email, password);
   res
     .status(200)
-    .json({ success: true, message: "Signin successful", accessToken: token });
+    .json({
+      success: true,
+      message: "Signin successful",
+      accessToken: token,
+      role,
+    });
 });
 
 export const signupUser = catchAsync(async (req, res) => {

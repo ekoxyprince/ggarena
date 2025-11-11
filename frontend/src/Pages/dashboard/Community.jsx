@@ -78,9 +78,8 @@ function Community() {
   }
 
   React.useEffect(() => {
-    socket.on("connect", () => {
-      console.log("Connected");
-    });
+    socket.auth.token = localStorage.getItem("token");
+    socket.connect();
     socket.emit("join-room", { room: id });
   }, [id]);
 

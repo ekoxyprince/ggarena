@@ -12,6 +12,6 @@ export default async (email, password) => {
   if (!bcrypt.compare(password, user.password)) {
     throw new BadrequestError("Incorrect creditials");
   }
-  const accessToken = await jwt.sign({ id: user._id }, env.jwt_secret);
-  return accessToken;
+  const token = await jwt.sign({ id: user._id }, env.jwt_secret);
+  return { token, role: user.role };
 };

@@ -34,10 +34,6 @@ function Dashboard() {
           value={200}
         />
       </div>
-      <div className="flex flex-col gap-2 md:flex-row md:gap-4">
-        <BarChart />
-        <BarChart />
-      </div>
       <div className="w-full bg-[#18181b] flex flex-col space-y-4 rounded-xl p-2">
         <h2>Last 10 registered users</h2>
         <Table aria-label="Example empty table">

@@ -23,7 +23,7 @@ function Login() {
         onSettled: (resp) => {
           if (resp) {
             auth.login(resp.accessToken);
-            navigate("/account");
+            navigate(resp.role == "user" ? "/account" : "/admin/dashboard");
           }
         },
       });
