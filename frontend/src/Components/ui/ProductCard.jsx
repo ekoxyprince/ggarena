@@ -1,12 +1,12 @@
-import React from 'react'
+import React from "react";
 import { Images } from "../../assets/Images";
-import { Link } from 'react-router-dom';
-import CustomButton from '../CustomButton';
-function ProductCard({data}) {
+import { Link } from "react-router-dom";
+import CustomButton from "../CustomButton";
+function ProductCard({ data }) {
   const { name, price, image, category, com } = data;
 
   return (
-    <div className=''>
+    <div className="">
       <div className="img-holder w-full h-[150px] border border-primary/40 overflow-hidden rounded-xl">
         <img
           className="w-full h-full object-cover object-center"
@@ -36,4 +36,4 @@ function ProductCard({data}) {
   );
 }
 
-export default ProductCard
+export default ProductCard;
