@@ -9,6 +9,7 @@ import Preloader from "./Components/ui/Preloader";
 import RouteChangeLoader from "./Components/RouteChangeLoader";
 import { Toaster } from "react-hot-toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ProductContext, { ProductProvider } from "./contexts/ProductsContext";
 const client = new QueryClient();
 
 function App() {

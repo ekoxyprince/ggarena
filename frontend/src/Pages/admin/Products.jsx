@@ -1,7 +1,12 @@
 import React from "react";
+import Marketplace from "../dashboard/Marketplace";
 
-function Products() {
-  return <div>Products</div>;
-}
+const Products = () => {
+  return (
+    <div>
+      <Marketplace />
+    </div>
+  );
+};
 
 export default Products;

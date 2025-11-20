@@ -22,6 +22,8 @@ import Products from "./src/Pages/admin/Products";
 import Orders from "./src/Pages/admin/Orders";
 import OrderDetails from "./src/Pages/admin/OrderDetails";
 import UserDetails from "./src/Pages/admin/UserDetails";
+import AddProduct from "./src/Pages/admin/AddProduct";
+import ProductDetails from "./src/Pages/admin/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -109,6 +111,14 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+      },
+      {
+        path: "products/:id",
+        element: <ProductDetails />,
+      },
+      {
+        path: "addproduct",
+        element: <AddProduct />,
       },
       {
         path: "orders",
