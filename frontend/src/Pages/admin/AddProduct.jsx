@@ -10,10 +10,31 @@ const AddProduct = () => {
     price: "",
     category: "",
     com: "",
+    longDescription: "",
+    shortDescription: "",
+    stock: "",
+    brand: "",
+    features: [],
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (
+      !name ||
+      !image ||
+      !price ||
+      !category ||
+      !com ||
+      !longDescription ||
+      !shortDescription ||
+      !stock ||
+      !brand ||
+      !features
+    ) {
+      alert("fill out all fields");
+      return;
+    }
 
     const newProduct = {
       name: form.name,
@@ -21,10 +42,26 @@ const AddProduct = () => {
       price: `₦${form.price}`,
       category: form.category,
       com: form.com,
+      longDescription: form.longDescription,
+      shortDescription: form.shortDescription,
+      stock: form.stock,
+      brand: form.brand,
+      features: form.features,
     };
 
     addProduct(newProduct);
-    setForm({ name: "", image: "", price: "", category: "", com: "" });
+    setForm({
+      name: "",
+      image: "",
+      price: "",
+      category: "",
+      com: "",
+      longDescription: "",
+      shortDescription: " ",
+      stock: "",
+      brand: "",
+      features: [],
+    });
   };
 
   const handleChange = (e) => {
@@ -63,7 +100,7 @@ const AddProduct = () => {
                 value={form.image}
                 placeholder="image"
                 onChange={handleChange}
-                className="px-4 py-2 font-Mont w-full text-xl rounded-md capitalize bg-[#292929] text-white border-t-[2px] border-b-[2px] border-[#474747] outline-0 focus:border-primary transition-colors"
+                className="px-4 py-2 font-Mont w-full text-xl rounded-md lowercase bg-[#292929] text-white border-t-[2px] border-b-[2px] border-[#474747] outline-0 focus:border-primary transition-colors"
               />
             </div>
 
@@ -95,6 +132,59 @@ const AddProduct = () => {
                 name="com"
                 placeholder="com"
                 value={form.com}
+                onChange={handleChange}
+                className="px-4 py-2 font-Mont w-full text-xl rounded-md lowercase bg-[#292929] text-white border-t-[2px] border-b-[2px] border-[#474747] outline-0 focus:border-primary transition-colors"
+              />
+            </div>
+
+            <div className="product_long_description">
+              <textarea
+                name="longDescription"
+                placeholder="Detailed description..."
+                value={form.longDescription}
+                onChange={handleChange}
+                className="px-4 py-2 w-full text-xl rounded-md  bg-[#292929] text-white border-t-[2px] border-b-[2px] border-[#474747] outline-0 focus:border-primary transition-colors"
+              />
+            </div>
+
+            <div className="product_short_description">
+              <input
+                type="text"
+                name="shortDescription"
+                placeholder="Short description..."
+                value={form.shortDescription}
+                onChange={handleChange}
+                className="px-4 py-2 font-Mont w-full text-xl rounded-md capitalize bg-[#292929] text-white border-t-[2px] border-b-[2px] border-[#474747] outline-0 focus:border-primary transition-colors"
+              />
+            </div>
+
+            <div className="product_features">
+              <textarea
+                name="features"
+                placeholder="List product features (one per line)"
+                value={form.features}
+                onChange={handleChange}
+                className="px-4 py-2 font-Mont w-full text-xl rounded-md capitalize bg-[#292929] text-white border-t-[2px] border-b-[2px] border-[#474747] outline-0 focus:border-primary transition-colors"
+              />
+            </div>
+
+            <div className="product_brand">
+              <input
+                type="text"
+                name="brand"
+                placeholder="brand"
+                value={form.brand}
+                onChange={handleChange}
+                className="px-4 py-2 font-Mont w-full text-xl rounded-md capitalize bg-[#292929] text-white border-t-[2px] border-b-[2px] border-[#474747] outline-0 focus:border-primary transition-colors"
+              />
+            </div>
+
+            <div className="product_stock">
+              <input
+                type="text"
+                name="stock"
+                placeholder="stock"
+                value={form.stock}
                 onChange={handleChange}
                 className="px-4 py-2 font-Mont w-full text-xl rounded-md capitalize bg-[#292929] text-white border-t-[2px] border-b-[2px] border-[#474747] outline-0 focus:border-primary transition-colors"
               />

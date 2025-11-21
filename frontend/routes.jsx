@@ -24,6 +24,8 @@ import OrderDetails from "./src/Pages/admin/OrderDetails";
 import UserDetails from "./src/Pages/admin/UserDetails";
 import AddProduct from "./src/Pages/admin/AddProduct";
 import ProductDetails from "./src/Pages/admin/ProductDetails";
+import Success from "./src/Pages/admin/Success";
+import Failure from "./src/Pages/admin/Failure";
 
 const router = createBrowserRouter([
   {
@@ -119,6 +121,14 @@ const router = createBrowserRouter([
       {
         path: "addproduct",
         element: <AddProduct />,
+      },
+      {
+        path: "success",
+        element: <Success />,
+      },
+      {
+        path: "failure",
+        element: <Failure />,
       },
       {
         path: "orders",
