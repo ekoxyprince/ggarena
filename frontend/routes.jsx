@@ -23,7 +23,7 @@ import Orders from "./src/Pages/admin/Orders";
 import OrderDetails from "./src/Pages/admin/OrderDetails";
 import UserDetails from "./src/Pages/admin/UserDetails";
 import AddProduct from "./src/Pages/admin/AddProduct";
-import ProductDetails from "./src/Pages/admin/ProductDetails";
+import ProductDetails from "./src/Pages/dashboard/ProductDetails";
 import Success from "./src/Pages/admin/Success";
 import Failure from "./src/Pages/admin/Failure";
 
@@ -78,6 +78,10 @@ const router = createBrowserRouter([
       {
         path: "/tournament/:id",
         element: <Tournament />,
+      },
+      {
+        path: "/products/:id",
+        element: <ProductDetails />,
       },
     ],
   },

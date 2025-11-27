@@ -21,11 +21,17 @@ function PopularCommunities({ communities }) {
           View all
         </span>
       </div>
-      <div className="grid grid-cols-2 md:flex flex-wrap gap-[40px] md:gap-[20px] mt-[35px] gap-y-[50px]">
-        {communities?.map((dt, index) => (
-          <CommunityCard key={index} data={dt} />
-        ))}
-      </div>
+      {communities?.length == 0 ? (
+        <div className="flex items-center justify-center mt-2">
+          <p className="font-bold text-xl">No communities available!</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-2 md:flex flex-wrap gap-[40px] md:gap-[20px] mt-[35px] gap-y-[50px]">
+          {communities?.map((dt, index) => (
+            <CommunityCard key={index} data={dt} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

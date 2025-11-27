@@ -10,6 +10,9 @@ import platformRoutes from "./routes/platform.js";
 import communityRoutes from "./routes/community.js";
 import tournamentRoutes from "./routes/tournament.js";
 import userRoutes from "./routes/user.js";
+import productRoutes from "./routes/product.js";
+import paymentRoutes from "./routes/payment.js";
+import orderRoutes from "./routes/order.js";
 import corsOptions from "./config/corsOptions.js";
 import cors from "cors";
 
@@ -29,6 +32,9 @@ app.use("/api/games", auth, gameRoutes);
 app.use("/api/communities", auth, communityRoutes);
 app.use("/api/tournaments", auth, tournamentRoutes);
 app.use("/api/user", auth, userRoutes);
+app.use("/api/products", auth, productRoutes);
+app.use("/api/payments", paymentRoutes);
+app.use("/api/orders", auth, orderRoutes);
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Not found!" });
 });

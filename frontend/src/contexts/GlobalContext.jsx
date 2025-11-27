@@ -12,6 +12,7 @@ export const GlobalProvider = ({ children }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isCommunityModalOpen, setIsCommunityModalOpen] = useState(false);
   const [isTournamentModalOpen, setIsTournamentModalOpen] = useState(false);
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const setNavOpen = () => {
     setIsNavOpen((prev) => !prev);
   };
@@ -21,6 +22,9 @@ export const GlobalProvider = ({ children }) => {
   const controlTournamentModal = () => {
     setIsTournamentModalOpen((prev) => !prev);
   };
+  const controlProductModal = () => {
+    setIsProductModalOpen((prev) => !prev);
+  };
   const value = {
     isNavOpen,
     setNavOpen,
@@ -28,6 +32,8 @@ export const GlobalProvider = ({ children }) => {
     controlCommunityModal,
     isTournamentModalOpen,
     controlTournamentModal,
+    isProductModalOpen,
+    controlProductModal,
   };
   return (
     <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>

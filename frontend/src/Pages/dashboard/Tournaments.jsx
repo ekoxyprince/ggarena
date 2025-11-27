@@ -73,11 +73,17 @@ function Tournaments() {
         </form>
       </Layout>
       <Layout>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[20px] mt-[35px]">
-          {tournaments?.map((data, index) => {
-            return <TornamentCard key={index} data={data} />;
-          })}
-        </div>
+        {tournaments?.length == 0 ? (
+          <div className="mt-2 flex items-center justify-center">
+            <p className="font-bold text-lg">No Tournaments available</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[20px] mt-[35px]">
+            {tournaments?.map((data, index) => {
+              return <TornamentCard key={index} data={data} />;
+            })}
+          </div>
+        )}
       </Layout>
     </div>
   );

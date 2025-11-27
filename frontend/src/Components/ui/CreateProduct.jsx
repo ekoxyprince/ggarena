@@ -2,13 +2,14 @@ import React from "react";
 import { IoAddOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
-function CreateProduct() {
+function CreateProduct({ onPress }) {
   return (
-    <div className="p-[15px] cursor-pointer hover:bg-[#262626] h-fit rounded-lg border-[#ffd700]/45 border-[1px] mt-[30px] border-dashed flex items-center gap-[15px]">
+    <div
+      onClick={onPress}
+      className="p-[15px] cursor-pointer hover:bg-[#262626] h-fit rounded-lg border-[#ffd700]/45 border-[1px] mt-[30px] border-dashed flex items-center gap-[15px]"
+    >
       <div className="w-[55px] bg-[#2e2e2e] h-[55px] rounded-full flex items-center justify-center cursor-pointer overflow-hidden">
-        <Link to={"/admin/addproduct"}>
-          <IoAddOutline className="text-primary" size={20} />
-        </Link>
+        <IoAddOutline className="text-primary" size={20} />
       </div>
 
       <div>

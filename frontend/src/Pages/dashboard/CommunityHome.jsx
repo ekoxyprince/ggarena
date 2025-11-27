@@ -107,115 +107,123 @@ function CommunityHome() {
         </Link>
       </div>
       <div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 gap-y-[20px]">
-          {data?.upcomingTournaments?.map((tournament, index) => (
-            <div
-              key={index}
-              className={`w-full ${
-                index === 0
-                  ? "md:col-span-3 flex flex-col md:flex-row gap-5 md:gap-[30px] items-start md:items-center"
-                  : ""
-              }`}
-            >
-              {/* Image */}
+        {data?.upcomingTournaments.length == 0 ? (
+          <div className="flex items-center justify-center">
+            <p className="font-bold text-lg">
+              No upcoming tournaments available.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 gap-y-[20px]">
+            {data?.upcomingTournaments?.map((tournament, index) => (
               <div
-                className={`img-holder w-full h-[200px] sm:h-[250px] md:h-[220px] overflow-hidden rounded-xl ${
-                  index === 0 ? "md:w-[50%] md:h-[380px]" : ""
+                key={index}
+                className={`w-full ${
+                  index === 0
+                    ? "md:col-span-3 flex flex-col md:flex-row gap-5 md:gap-[30px] items-start md:items-center"
+                    : ""
                 }`}
               >
-                <img
-                  className="w-full h-full object-cover object-center"
-                  src={tournament.image}
-                  alt=""
-                />
-              </div>
-
-              {/* Info Section */}
-              <div
-                className={`bottom w-full mt-3 sm:mt-[10px] flex gap-2 items-start justify-start ${
-                  index === 0 ? "md:w-[50%]" : ""
-                }`}
-              >
-                {/* Host Icon */}
+                {/* Image */}
                 <div
-                  className={`host w-[35px] sm:w-[40px] h-[35px] sm:h-[40px] rounded-full overflow-hidden ${
-                    index === 0 ? "hidden" : ""
+                  className={`img-holder w-full h-[200px] sm:h-[250px] md:h-[220px] overflow-hidden rounded-xl ${
+                    index === 0 ? "md:w-[50%] md:h-[380px]" : ""
                   }`}
                 >
                   <img
                     className="w-full h-full object-cover object-center"
-                    src={tournament.hostedBy.image}
+                    src={tournament.image}
                     alt=""
                   />
                 </div>
 
-                {/* Text */}
-                <div className="flex flex-col w-[85%] sm:w-[80%] gap-1">
-                  <p
-                    className={`text-xs sm:text-sm text-primary font-semibold ${
-                      index === 0 ? "sm:text-[14px]" : ""
-                    }`}
-                  >
-                    {new Date(tournament.createdAt).toDateString()}
-                  </p>
-                  <Link
-                    to={`/tournament/${tournament._id}`}
-                    className={`hover:underline text-[14px] sm:text-[16px] text-white/95 ${
-                      index === 0
-                        ? "text-[20px] sm:text-[25px] font-bold leading-6 sm:leading-8"
-                        : "line-clamp-2 font-semibold"
-                    }`}
-                  >
-                    {tournament.name}
-                  </Link>
-
+                {/* Info Section */}
+                <div
+                  className={`bottom w-full mt-3 sm:mt-[10px] flex gap-2 items-start justify-start ${
+                    index === 0 ? "md:w-[50%]" : ""
+                  }`}
+                >
+                  {/* Host Icon */}
                   <div
-                    className={`flex flex-wrap items-center gap-1.5 sm:gap-2 text-gray-300 ${
-                      index === 0
-                        ? "text-[13px] sm:text-[15px] mt-[2px]"
-                        : "text-xs sm:text-sm"
+                    className={`host w-[35px] sm:w-[40px] h-[35px] sm:h-[40px] rounded-full overflow-hidden ${
+                      index === 0 ? "hidden" : ""
                     }`}
                   >
-                    <span>{tournament.mode}</span>
-                    <span>•</span>
-                    <span>
-                      {tournament.mode == "1v1"
-                        ? "Single Elimination"
-                        : "Battle royale"}
-                    </span>
-                    <span>•</span>
-                    <span>{tournament.game.name}</span>
-                    <span>•</span>
-                    <span>
-                      {tournament.participants.length}/
-                      {tournament.totalParticipants}
-                    </span>
+                    <img
+                      className="w-full h-full object-cover object-center"
+                      src={tournament.hostedBy.image}
+                      alt=""
+                    />
                   </div>
 
-                  {/* Hosted By */}
-                  <div
-                    className={`${
-                      index === 0
-                        ? "flex gap-2 items-center mt-[6px]"
-                        : "hidden"
-                    }`}
-                  >
-                    <div className="host w-[35px] sm:w-[40px] h-[35px] sm:h-[40px] rounded-full overflow-hidden">
-                      <img
-                        className="w-full h-full object-cover object-center"
-                        src={tournament.hostedBy.image}
-                        alt=""
-                      />
-                    </div>
-                    <p className="text-sm sm:text-base">
-                      Hosted by {tournament.hostedBy.name}
+                  {/* Text */}
+                  <div className="flex flex-col w-[85%] sm:w-[80%] gap-1">
+                    <p
+                      className={`text-xs sm:text-sm text-primary font-semibold ${
+                        index === 0 ? "sm:text-[14px]" : ""
+                      }`}
+                    >
+                      {new Date(tournament.createdAt).toDateString()}
                     </p>
+                    <Link
+                      to={`/tournament/${tournament._id}`}
+                      className={`hover:underline text-[14px] sm:text-[16px] text-white/95 ${
+                        index === 0
+                          ? "text-[20px] sm:text-[25px] font-bold leading-6 sm:leading-8"
+                          : "line-clamp-2 font-semibold"
+                      }`}
+                    >
+                      {tournament.name}
+                    </Link>
+
+                    <div
+                      className={`flex flex-wrap items-center gap-1.5 sm:gap-2 text-gray-300 ${
+                        index === 0
+                          ? "text-[13px] sm:text-[15px] mt-[2px]"
+                          : "text-xs sm:text-sm"
+                      }`}
+                    >
+                      <span>{tournament.mode}</span>
+                      <span>•</span>
+                      <span>
+                        {tournament.mode == "1v1"
+                          ? "Single Elimination"
+                          : "Battle royale"}
+                      </span>
+                      <span>•</span>
+                      <span>{tournament.game.name}</span>
+                      <span>•</span>
+                      <span>
+                        {tournament.participants.length}/
+                        {tournament.totalParticipants}
+                      </span>
+                    </div>
+
+                    {/* Hosted By */}
+                    <div
+                      className={`${
+                        index === 0
+                          ? "flex gap-2 items-center mt-[6px]"
+                          : "hidden"
+                      }`}
+                    >
+                      <div className="host w-[35px] sm:w-[40px] h-[35px] sm:h-[40px] rounded-full overflow-hidden">
+                        <img
+                          className="w-full h-full object-cover object-center"
+                          src={tournament.hostedBy.image}
+                          alt=""
+                        />
+                      </div>
+                      <p className="text-sm sm:text-base">
+                        Hosted by {tournament.hostedBy.name}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
       <div className="mt-[50px]">
         <div className="mb-[17px] flex items-center justify-between">
@@ -229,65 +237,73 @@ function CommunityHome() {
           </Link>
         </div>
         <div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            {data?.pastTournaments?.map((tournament, index) => (
-              <div
-                key={index}
-                className={`'w-ful
-                }`}
-              >
+          {data?.pastTournaments.length == 0 ? (
+            <div className="flex items-center justify-center">
+              <p className="font-bold text-lg">
+                No past tournaments available.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              {data?.pastTournaments?.map((tournament, index) => (
                 <div
-                  className={`img-holder w-full h-[180px] overflow-hidden rounded-lg`}
+                  key={index}
+                  className={`'w-ful
+                }`}
                 >
-                  <img
-                    className="w-full h-full object-cover object-center "
-                    src={tournament.image}
-                    alt=""
-                  />
-                </div>
-                <div className={`bottom mt-[10px]  flex gap-2 items-start `}>
                   <div
-                    className={`host w-[40px] h-[40px] rounded-full overflow-hidden flex items-center justify-center`}
+                    className={`img-holder w-full h-[180px] overflow-hidden rounded-lg`}
                   >
                     <img
                       className="w-full h-full object-cover object-center "
-                      src={tournament.hostedBy.image}
+                      src={tournament.image}
                       alt=""
                     />
                   </div>
-                  <div className="flex flex-col gap-1 w-[80%]">
-                    <p className={`text-sm text-primary font-semibold`}>
-                      {new Date(tournament.createdAt).toLocaleString()}
-                    </p>
-                    <Link
-                      className={` hover:underline line-clamp-1 font-semibold text-[16px] text-white/95`}
-                    >
-                      {tournament.name}
-                    </Link>
+                  <div className={`bottom mt-[10px]  flex gap-2 items-start `}>
                     <div
-                      className={`flex flex-wrap items-center text-sm gap-2 text-gray-300`}
+                      className={`host w-[40px] h-[40px] rounded-full overflow-hidden flex items-center justify-center`}
                     >
-                      <span>{tournament.mode}</span>
-                      <span>•</span>
-                      <span>
-                        {" "}
-                        {tournament.mode == "1v1"
-                          ? "Single Elimination"
-                          : "Battle royale"}
-                      </span>
-                      <span>•</span>
-                      <span>{tournament.game.name}</span>
-                      <span>•</span>
-                      <span>
-                        {tournament.participants.length}/
-                        {tournament.totalParticipants}
-                      </span>
+                      <img
+                        className="w-full h-full object-cover object-center "
+                        src={tournament.hostedBy.image}
+                        alt=""
+                      />
+                    </div>
+                    <div className="flex flex-col gap-1 w-[80%]">
+                      <p className={`text-sm text-primary font-semibold`}>
+                        {new Date(tournament.createdAt).toLocaleString()}
+                      </p>
+                      <Link
+                        className={` hover:underline line-clamp-1 font-semibold text-[16px] text-white/95`}
+                      >
+                        {tournament.name}
+                      </Link>
+                      <div
+                        className={`flex flex-wrap items-center text-sm gap-2 text-gray-300`}
+                      >
+                        <span>{tournament.mode}</span>
+                        <span>•</span>
+                        <span>
+                          {" "}
+                          {tournament.mode == "1v1"
+                            ? "Single Elimination"
+                            : "Battle royale"}
+                        </span>
+                        <span>•</span>
+                        <span>{tournament.game.name}</span>
+                        <span>•</span>
+                        <span>
+                          {tournament.participants.length}/
+                          {tournament.totalParticipants}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <div className="mt-[50px] about">

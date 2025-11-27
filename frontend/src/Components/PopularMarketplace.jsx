@@ -16,7 +16,12 @@ import comIC4 from "../assets/Images/comIC4.webp";
 import comIC5 from "../assets/Images/comIC5.webp";
 import comIC6 from "../assets/Images/comIC6.webp";
 import comIC7 from "../assets/Images/comIC7.webp";
+import useFetch from "../hooks/useFetch";
 function PopularMarketplace() {
+  const { data } = useFetch({
+    key: `Products`,
+    url: "/api/products",
+  });
   const products = [
     {
       name: "ONIKUMA GT808 2.4GHz Wireless Gaming Headset",
@@ -78,11 +83,17 @@ function PopularMarketplace() {
   return (
     <div className="mt-[60px] pb-[60px] px-[25px]">
       <p className="mb-[15px] text-[27px] font-bold">Marketplace listings</p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[20px] gap-y-[30px]">
-        {products.map((product, index) => (
-          <ProductCard key={index} data={product} />
-        ))}
-      </div>
+      {data?.length == 0 ? (
+        <div className="flex items-center justify-center mt-2">
+          <p className="font-bold text-lg">No Product available!</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[20px] gap-y-[30px] pt-[40px]">
+          {data?.map((product, index) => (
+            <ProductCard key={product.id} data={product} />
+          ))}
+        </div>
+      )}
       <div className="flex items-center gap-4 my-6 mt-[50px]">
         <div className="flex-1 h-[1.9px] bg-[#2e2e2e]"></div>
         <button className="flex items-center px-4 py-[10px] bg-[#2e2e2e] text-white font-semibold rounded-lg text-sm">

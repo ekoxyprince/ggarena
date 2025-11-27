@@ -62,11 +62,17 @@ function Communities() {
         />
       </div>
       <Layout>
-        <div className="grid grid-cols-2 md:flex flex-wrap gap-[40px] md:gap-[20px] mt-[90px] pb-[100px] gap-y-[50px] max-w-[87%] mx-auto w-fit">
-          {data?.map((dt, index) => (
-            <CommunityCard key={index} data={dt} />
-          ))}
-        </div>
+        {data?.length == 0 ? (
+          <div className="flex items-center justify-center">
+            <p className="font-bold text-lg">No communities available</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:flex flex-wrap gap-[40px] md:gap-[20px] mt-[90px] pb-[100px] gap-y-[50px] max-w-[87%] mx-auto w-fit">
+            {data?.map((dt, index) => (
+              <CommunityCard key={index} data={dt} />
+            ))}
+          </div>
+        )}
       </Layout>
     </div>
   );

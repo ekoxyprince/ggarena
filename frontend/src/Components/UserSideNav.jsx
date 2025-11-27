@@ -15,13 +15,22 @@ import {
   Button,
   useDisclosure,
 } from "@heroui/react";
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 function UserSideNav({ user }) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const navigate = useNavigate();
+  const { isNavOpen } = useGlobalContext();
+  console.log(isNavOpen);
   return (
-    <div className="bg-[#2e2e2e] w-[60px] md:flex justify-center top-0 left-0 min-h-screen fixed pt-[60px] hidden z-50">
-      <div className="pt-4 gap-[10px] overflow-y-auto h-[calc(100vh-60px)] scrollbar-hide pb-[15px]">
+    <div
+      className={`bg-[#2e2e2e] w-[60px] justify-center top-0 left-0 min-h-screen fixed pt-[60px] ${
+        isNavOpen
+          ? "flex opacity-100"
+          : "hidden opacity-0 md:flex md:opacity-100"
+      } z-50 `}
+    >
+      <div className="ml-2 md:ml-0 pt-4 gap-[10px] overflow-y-auto h-[calc(100vh-60px)] scrollbar-hide pb-[15px]">
         {user?.communities.map((community, index) => {
           return (
             <Link to={`/community/${community._id}`}>

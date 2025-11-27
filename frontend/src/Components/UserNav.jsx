@@ -4,9 +4,11 @@ import { IoNotifications } from "react-icons/io5";
 import { Link, useLocation } from "react-router-dom";
 import { FaBars, FaTimes, FaEllipsisV } from "react-icons/fa";
 import { useAuth } from "../contexts/AuthContext";
+import { useGlobalContext } from "../contexts/GlobalContext";
 
 function UserNav({ user }) {
   const { pathname } = useLocation();
+  const { setNavOpen } = useGlobalContext();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [avatarMenuOpen, setAvatarMenuOpen] = useState(false);
@@ -20,7 +22,7 @@ function UserNav({ user }) {
   ];
 
   const toggleMenu = () => setMobileMenuOpen((prev) => !prev);
-  const toggleSidebar = () => setSidebarOpen((prev) => !prev);
+  const toggleSidebar = () => setNavOpen();
   const toggleAvatarMenu = () => setAvatarMenuOpen((prev) => !prev);
 
   // Close dropdown when clicking outside

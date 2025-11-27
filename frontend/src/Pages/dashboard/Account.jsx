@@ -56,37 +56,49 @@ function Account() {
           <div className="w-full">
             <div>
               <p className="">Games</p>
-              <div className="my-2 grid grid-cols-5 md:grid-cols-3 gap-4">
-                {games?.map((g, i) => {
-                  return (
-                    <div className="h-[53px] w-[52px]">
-                      <img
-                        key={`index-${i}`}
-                        src={g.image}
-                        className="brightness-[95%] w-full h-full border-primary/80 border-[2.1px] rounded-lg overflow-hidden"
-                        alt=""
-                      />
-                    </div>
-                  );
-                })}
-              </div>
+              {games?.length == 0 ? (
+                <div className="flex items-center justify-center">
+                  <p className="font-bold text-sm">No games available</p>
+                </div>
+              ) : (
+                <div className="my-2 grid grid-cols-5 md:grid-cols-3 gap-4">
+                  {games?.map((g, i) => {
+                    return (
+                      <div className="h-[53px] w-[52px]">
+                        <img
+                          key={`index-${i}`}
+                          src={g.image}
+                          className="brightness-[95%] w-full h-full border-primary/80 border-[2.1px] rounded-lg overflow-hidden"
+                          alt=""
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
             <div className="mt-2">
               <p>Platforms</p>
-              <div className="my-2 grid grid-cols-5 md:grid-cols-3 gap-2.5">
-                {platforms?.map((p, i) => {
-                  return (
-                    <div className="h-[53px] w-[52px]">
-                      <img
-                        key={`index-${i}`}
-                        src={p.image}
-                        className="brightness-[95%] border-primary/80 border-[2.1px] w-full h-full rounded-lg overflow-hidden"
-                        alt=""
-                      />
-                    </div>
-                  );
-                })}
-              </div>
+              {platforms?.length == 0 ? (
+                <div className="flex items-center justify-center">
+                  <p className="font-bold text-sm">No platforms available</p>
+                </div>
+              ) : (
+                <div className="my-2 grid grid-cols-5 md:grid-cols-3 gap-2.5">
+                  {platforms?.map((p, i) => {
+                    return (
+                      <div className="h-[53px] w-[52px]">
+                        <img
+                          key={`index-${i}`}
+                          src={p.image}
+                          className="brightness-[95%] border-primary/80 border-[2.1px] w-full h-full rounded-lg overflow-hidden"
+                          alt=""
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </div>
         </div>

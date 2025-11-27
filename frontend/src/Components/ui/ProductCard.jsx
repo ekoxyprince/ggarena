@@ -3,7 +3,8 @@ import { Images } from "../../assets/Images";
 import { Link } from "react-router-dom";
 import CustomButton from "../CustomButton";
 function ProductCard({ data }) {
-  const { name, price, image, category, com } = data;
+  const { name, price, image, category, com, id, _id, community, currency } =
+    data;
 
   return (
     <div className="">
@@ -18,18 +19,23 @@ function ProductCard({ data }) {
         <div className="seller w-[40px] h-[40px] rounded-full overflow-hidden">
           <img
             className="w-full h-full object-cover object-center"
-            src={com}
+            src={community?.image}
             alt=""
           />
         </div>
         <div className="flex flex-col gap-1">
-          {/* <div className="tag w-fit p-[2px] px-[13px] border-primary/70 border-1 text-[13px] rounded-lg text-primary/70">
+          <div className="tag w-fit p-[2px] px-[13px] border-primary/70 border-1 text-[13px] rounded-lg text-primary/70">
             {category}
-          </div> */}
-          <Link className="name font-semibold hover:underline line-clamp-2 text-[16px] text-white/95">
+          </div>
+          <Link
+            to={`/products/${_id}`}
+            className="name font-semibold hover:underline line-clamp-2 text-[16px] text-white/95"
+          >
             {name}
           </Link>
-          <p className="price mt-[-2px] text-primary text-[15px]">{price}</p>
+          <p className="price mt-[-2px] text-primary text-[15px]">
+            {currency} {price}
+          </p>
         </div>
       </div>
     </div>
