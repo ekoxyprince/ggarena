@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ProductContext from "../../contexts/ProductsContext";
 import useFetch from "../../hooks/useFetch";
+import useMutate from "../../hooks/useMutate";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -12,6 +13,11 @@ const ProductDetails = () => {
     key: `Prod@${id}`,
     url: `/api/products/${id}`,
   });
+  const { mutateAsync } = useMutate(
+    `/api/orders/product/${id}`,
+    [`order@${id}`],
+    "post"
+  );
 
   const navigate = useNavigate();
 
@@ -31,9 +37,21 @@ const ProductDetails = () => {
   const decreaseQuantity = () =>
     setQuantity(quantity - 1 < 1 ? 1 : quantity - 1);
 
-  const handleClick = () => {
-    const isSuccessful = Math.random() > 0.5;
-    navigate(isSuccessful ? "/admin/success" : "/admin/failure");
+  const handleClick = async () => {
+    await mutateAsync(
+      {
+        community: data?.community,
+        quantity,
+        amount: data?.price * quantity,
+      },
+      {
+        onSettled: (resp) => {
+          if (resp) {
+            window.location.href = resp.data.authorization_url;
+          }
+        },
+      }
+    );
   };
 
   const isOutOfStock = quantity > data?.stockCount;

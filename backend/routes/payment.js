@@ -3,6 +3,6 @@ import * as controller from "../controllers/payment.js";
 
 const router = Router();
 
-router.route("/initialize").get(controller.create);
+router.route("/callback").get(controller.create);
 
 export default router;

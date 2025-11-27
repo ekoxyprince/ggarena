@@ -14,4 +14,5 @@ export default {
     process.env.REMOTE_DOMAIN,
     process.env.TEST_DOMAIN,
   ],
+  paystack_key: process.env.PAYSTACK_KEY,
 };

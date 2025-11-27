@@ -13,7 +13,7 @@ export default async function createOrder(body, user, productId) {
     quantity: body.quantity,
     totalAmount: body.amount,
     community: body.community,
-    product: body.product,
+    product: product._id,
   });
   const resp = await startPayment({
     amount: body.amount,

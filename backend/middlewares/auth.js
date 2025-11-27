@@ -21,3 +21,20 @@ export default async (req, res, next) => {
     next(error);
   }
 };
+
+export const adminAuth = async (req, res, next) => {
+  try {
+    const user = await User.findOne({
+      _id: req.session.user._id,
+      role: "admin",
+    });
+    if (!user) {
+      req.flash("data", { success: false, message: "Invalid session" });
+      return res.redirect("/admin/signin");
+    }
+    req.user = user;
+    next();
+  } catch (error) {
+    next(error);
+  }
+};

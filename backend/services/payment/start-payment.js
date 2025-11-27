@@ -1,5 +1,4 @@
 import axios from "axios";
-import Payment from "../../database/models/payment.js";
 import _ from "lodash";
 import { paystack } from "../../utils/paystack.js";
 const { initializePayment } = paystack(axios);

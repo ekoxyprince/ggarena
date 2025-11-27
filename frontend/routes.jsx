@@ -8,7 +8,7 @@ import Profile from "./src/Pages/Dashboard/Profile";
 import DashboardLayout from "./src/Pages/dashboard/DashboardLayout";
 import Communities from "./src/Pages/dashboard/Communities";
 import Community from "./src/Pages/Dashboard/Community";
-import Tournaments from "./src/Pages/Dashboard/Tournaments";
+import Tournaments from "./src/Pages/dashboard/Tournaments";
 import Tournament from "./src/Pages/dashboard/Tournament";
 import { Protected } from "./src/contexts/AuthContext";
 import Dashboard from "./src/Pages/admin/Dashboard";
@@ -24,8 +24,8 @@ import OrderDetails from "./src/Pages/admin/OrderDetails";
 import UserDetails from "./src/Pages/admin/UserDetails";
 import AddProduct from "./src/Pages/admin/AddProduct";
 import ProductDetails from "./src/Pages/dashboard/ProductDetails";
-import Success from "./src/Pages/admin/Success";
-import Failure from "./src/Pages/admin/Failure";
+import Success from "./src/Pages/dashboard/Success";
+import Failure from "./src/Pages/dashboard/Failure";
 
 const router = createBrowserRouter([
   {
@@ -83,6 +83,14 @@ const router = createBrowserRouter([
         path: "/products/:id",
         element: <ProductDetails />,
       },
+      {
+        path: "success",
+        element: <Success />,
+      },
+      {
+        path: "failure",
+        element: <Failure />,
+      },
     ],
   },
   {
@@ -126,14 +134,7 @@ const router = createBrowserRouter([
         path: "addproduct",
         element: <AddProduct />,
       },
-      {
-        path: "success",
-        element: <Success />,
-      },
-      {
-        path: "failure",
-        element: <Failure />,
-      },
+
       {
         path: "orders",
         element: <Orders />,

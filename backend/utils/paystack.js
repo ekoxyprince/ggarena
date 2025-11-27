@@ -1,11 +1,13 @@
-const paystack_key = process.env.PAYSTACK_KEY;
+import env from "../config/env.js";
+
+const paystack_key = env.paystack_key;
 
 const paystack = (request) => {
   const initializePayment = (body) => {
     const options = {
       url: "https://api.paystack.co/transaction/initialize",
       headers: {
-        Authorization: paystack_key,
+        Authorization: "Bearer " + paystack_key,
         "content-type": "application/json",
         "cache-control": "no-cache",
       },
@@ -22,7 +24,7 @@ const paystack = (request) => {
       url:
         `https://api.paystack.co/transaction/verify/` + encodeURIComponent(ref),
       headers: {
-        authorization: paystack_key,
+        Authorization: "Bearer " + paystack_key,
         "content-type": "application/json",
         "cache-control": "no-cache",
       },

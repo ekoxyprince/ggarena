@@ -4,6 +4,8 @@ import Payment from "../../database/models/payment.js";
 import _ from "lodash";
 import { paystack } from "../../utils/paystack.js";
 const { verifyPayment } = paystack(axios);
+import Order from "../../database/models/order.js";
+import Product from "../../database/models/product.js";
 
 export default function (req) {
   const ref = req.reference;
@@ -37,6 +39,14 @@ export default function (req) {
       } else {
         payment = await Payment.create(newPayment);
       }
+      const order = await Order.findById(orderId);
+      order.payment = payment._id;
+      if (payment.status == "success") {
+        const product = await Product.findById(order.product);
+        product.stockCount -= Number(Number(amount / 100) / product.price);
+        await product.save();
+      }
+      await order.save();
       return resolve(stat == newPayment.status ? null : payment);
     } catch (error) {
       error.source = "Create Payment Service";
