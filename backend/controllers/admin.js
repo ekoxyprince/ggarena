@@ -82,7 +82,6 @@ export const getDashboard = catchAsync(async (req, res) => {
       select: "fullname profilePic", // Only these fields
     });
 
-  console.log(latestTournaments[0].participants);
   // Render dashboard
   res.render("./dashboard", {
     data: flashData,
