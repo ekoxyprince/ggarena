@@ -15,6 +15,7 @@ connectToDb().then(async () => {
       fullname: "Administrator",
       email: "support@ggarena.gg",
       password: "GGarena@dev",
+      role: "admin",
     });
     console.log("Admin Created");
   }
