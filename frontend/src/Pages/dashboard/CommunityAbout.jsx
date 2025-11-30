@@ -143,7 +143,7 @@ function CommunityAbout() {
           </h3>
           <div className="flex gap-2 gap-y-4 flex-wrap">
             {data?.participants
-              .filter((d) => d.isAdmin == true)
+              .filter((d) => d.isAdmin !== true)
               .map((member) => (
                 <Tooltip
                   content={
