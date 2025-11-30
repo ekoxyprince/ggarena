@@ -21,6 +21,7 @@ import Connect from "connect-mongodb-session";
 import env from "./config/env.js";
 import ejs from "ejs";
 import path from "node:path";
+import flash from "connect-flash";
 const MongoDBStore = Connect(session);
 
 const app = express();
@@ -34,7 +35,7 @@ app.engine("ejs", ejs.renderFile);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "backend", "admin"));
 app.use(compression());
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(express.json());
 app.use(express.static("./backend/public"));
 app.use(bodyParser.json());
@@ -52,9 +53,17 @@ app.use(
     },
   })
 );
+app.use(flash());
 store.on("error", function (error) {
   console.log(error);
 });
+if (process.env.NODE_ENV == "production") {
+  let frontendPath = path.join(__dirname, "frontend", "dist");
+  app.use(express.static(frontendPath));
+  app.get(/^\/(?!api)(?!admin).*/, (req, res) => {
+    res.sendFile(path.join(frontendPath, "index.html"));
+  });
+}
 app.use("/api/auth", authRoutes);
 app.use("/api/platforms", auth, platformRoutes);
 app.use("/api/games", auth, gameRoutes);

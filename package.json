@@ -7,6 +7,8 @@
   "scripts": {
     "test": "mocha",
     "dev": "nodemon",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "cross-env NODE_ENV=production node backend/server.js",
     "conc": "concurrently \"npm run dev\" \"npm run dev --prefix frontend \"  "
   },
   "repository": {
@@ -30,6 +32,7 @@
     "body-parser": "^2.2.0",
     "cloudinary": "^2.7.0",
     "compression": "^1.8.1",
+    "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
@@ -42,7 +45,7 @@
     "mongoose": "^8.18.2",
     "morgan": "^1.10.1",
     "multer": "^2.0.2",
-    "nodemailer": "^7.0.6",
+    "nodemailer": "^7.0.11",
     "socket.io": "^4.8.1"
   },
   "devDependencies": {

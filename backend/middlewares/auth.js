@@ -24,6 +24,10 @@ export default async (req, res, next) => {
 
 export const adminAuth = async (req, res, next) => {
   try {
+    if (!req.session.isLoggedIn) {
+      req.flash("data", { success: false, message: "Invalid session" });
+      return res.redirect("/admin/signin");
+    }
     const user = await User.findOne({
       _id: req.session.user._id,
       role: "admin",

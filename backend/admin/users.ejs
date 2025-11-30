@@ -1,0 +1,161 @@
+      <%- include("./partials/header") %>
+      <!-- cards -->
+      <div class="w-full px-6 py-6 mx-auto">
+        <!-- row 1 -->
+
+
+        <!-- cards row 2 -->
+     
+
+        <!-- cards row 3 -->
+
+       
+
+        <!-- cards row 4 -->
+
+        <div class="flex flex-wrap my-6 -mx-3">
+          <!-- card 1 -->
+
+          <div
+            class="w-full max-w-full px-3 mt-0 mb-6 md:mb-0 md:w-full md:flex-none lg:w-full lg:flex-none"
+          >
+            <div
+              class="border-black/12.5 shadow-soft-xl relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border"
+            >
+              <div
+                class="border-black/12.5 mb-0 rounded-t-2xl border-b-0 border-solid bg-white p-6 pb-0"
+              >
+                <div class="flex flex-wrap mt-0 -mx-3">
+                  <div
+                    class="flex-none w-7/12 max-w-full px-3 mt-0 lg:w-1/2 lg:flex-none"
+                  >
+                    <h6>Users</h6>
+                    <p class="mb-0 leading-normal text-sm">
+                      <i class="fa fa-check text-cyan-500"></i>
+                      <span class="ml-1 font-semibold"></span>
+                     
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-auto p-6 px-0 pb-2">
+                <div class="overflow-x-auto">
+                  <table
+                    class="items-center w-full mb-0 align-top border-gray-200 text-slate-500"
+                  >
+                    <thead class="align-bottom">
+                      <tr>
+                        <th
+                          class="px-6 py-3 font-bold tracking-normal text-left uppercase align-middle bg-transparent border-b letter border-b-solid text-xxs whitespace-nowrap border-b-gray-200 text-slate-400 opacity-70"
+                        >
+                          Name
+                        </th>
+                        <th
+                          class="px-6 py-3 pl-2 font-bold tracking-normal text-left uppercase align-middle bg-transparent border-b letter border-b-solid text-xxs whitespace-nowrap border-b-gray-200 text-slate-400 opacity-70"
+                        >
+                          Email
+                        </th>
+
+                    <th
+                   class="px-6 py-3 pl-2 font-bold tracking-normal text-left uppercase align-middle bg-transparent border-b letter border-b-solid text-xxs whitespace-nowrap border-b-gray-200 text-slate-400 opacity-70"
+                 >
+                   Tournaments Created
+                 </th>
+                  <th
+                          class="px-6 py-3 pl-2 font-bold tracking-normal text-left uppercase align-middle bg-transparent border-b letter border-b-solid text-xxs whitespace-nowrap border-b-gray-200 text-slate-400 opacity-70"
+                        >
+                          Communities Joined
+                        </th>
+                         <th
+                          class="px-6 py-3 pl-2 font-bold tracking-normal text-left uppercase align-middle bg-transparent border-b letter border-b-solid text-xxs whitespace-nowrap border-b-gray-200 text-slate-400 opacity-70"
+                        >
+                          Tournaments Won
+                        </th>
+                         <th
+                          class="px-6 py-3 pl-2 font-bold tracking-normal text-left uppercase align-middle bg-transparent border-b letter border-b-solid text-xxs whitespace-nowrap border-b-gray-200 text-slate-400 opacity-70"
+                        >
+                          Communities Created
+                        </th>
+                        <th
+                          class="px-6 py-3 pl-2 font-bold tracking-normal text-left uppercase align-middle bg-transparent border-b letter border-b-solid text-xxs whitespace-nowrap border-b-gray-200 text-slate-400 opacity-70"
+                        >
+                          Status
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <% users.forEach(g => { %>
+                       <tr>
+                        <td
+                          class="p-2 align-middle bg-transparent border-b whitespace-nowrap"
+                        >
+                          <div class="flex px-2 py-1">
+                            <div>
+                              <img
+                                src="<%= g.profilePic %>"
+                                class="inline-flex items-center justify-center mr-4 text-white transition-all duration-200 ease-soft-in-out text-sm h-9 w-9 rounded-xl"
+                                alt="xd"
+                              />
+                            </div>
+                            <div class="flex flex-col justify-center">
+                              <h6 class="mb-0 leading-normal text-sm">
+                                <%= g.fullname %>
+                              </h6>
+                            </div>
+                          </div>
+                        </td>
+ <td
+                          class="p-2 align-middle bg-transparent border-b whitespace-nowrap"
+                        >
+                          <div class="w-3/4 mx-auto">
+                           <span><%= g.email %></span>
+                          </div>
+                        </td>
+                        <td
+                          class="p-2 align-middle bg-transparent border-b whitespace-nowrap"
+                        >
+                          <div class="w-2 mx-auto">
+                           <span><%= g.tournamentsCreated %></span>
+                          </div>
+                        </td>
+                        <td
+                          class="p-2 align-middle bg-transparent border-b whitespace-nowrap"
+                        >
+                          <div class="">
+                           <span><%= g.communitiesJoined %></span>
+                          </div>
+                        </td>
+                        <td
+                          class="p-2 align-middle bg-transparent border-b whitespace-nowrap"
+                        >
+                          <div class="">
+                           <span><%= g.tournamentsWon %></span>
+                          </div>
+                        </td>
+                        <td
+                          class="p-2 align-middle bg-transparent border-b whitespace-nowrap"
+                        >
+                          <div class="w-3/4 mx-auto">
+                           <span><%= g.communitiesCreated %></span>
+                          </div>
+                        </td>
+                         <td
+                          class="p-2 align-middle bg-transparent border-b whitespace-nowrap"
+                        >
+                          <div class="w-3/4 mx-auto">
+                           <span><%= g.status %></span>
+                          </div>
+                        </td>
+                      </tr>
+                    <% }) %>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- card 2 -->
+        </div>
+ <%- include("./partials/footer") %>
+    

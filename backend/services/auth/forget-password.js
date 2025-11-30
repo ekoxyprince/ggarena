@@ -1,6 +1,7 @@
 import User from "../../database/models/user.js";
 import { BadrequestError } from "../../http/exceptions/error.js";
 import Crypto from "node:crypto";
+import defaultMailOptions from "../../utils/mail/default-mailoption.js";
 
 export default async (email) => {
   const user = await User.findOne({ email });
@@ -13,6 +14,11 @@ export default async (email) => {
     .digest("hex");
   user.resetToken = hashedResetToken;
   await user.save();
-  //send reset token via mail
+  await defaultMailOptions(
+    user.fullname,
+    user.email,
+    "Password Reset",
+    `Click the link to reset Password <a href="https://ggarena.gg/reset-password/${resetToken}">Reset</a>`
+  );
   return resetToken;
 };

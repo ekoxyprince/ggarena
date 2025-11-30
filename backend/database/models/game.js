@@ -11,11 +11,6 @@ const Game = mongoose.model(
       type: String,
       required: true,
     },
-    platform: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Platform",
-      required: true,
-    },
   })
 );
 

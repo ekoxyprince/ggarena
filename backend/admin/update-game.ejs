@@ -1,0 +1,42 @@
+      <%- include("./partials/header") %>
+      <!-- cards -->
+      <div class="w-full px-6 py-6 mx-auto">
+   <div class="flex-auto p-6">
+                  <form role="form text-left" action="" method="post">
+                    <div class="mb-4">
+                      <input
+                        type="text"
+                        class="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
+                        name="name"
+                        placeholder="Name"
+                        aria-label="Name"
+                        aria-describedby="email-addon" 
+                        value="<%= game.name %>"
+                        />
+                        
+                    </div>
+                    <div class="mb-4">
+                      <input
+                        type="text"
+                        class="text-sm focus:shadow-soft-primary-outline leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 px-3 font-normal text-gray-700 transition-all focus:border-fuchsia-300 focus:bg-white focus:text-gray-700 focus:outline-none focus:transition-shadow"
+                        placeholder="Image URL"
+                        name="image"
+                        aria-label="Email"
+                        aria-describedby="email-addon"
+                        value="<%= game.image %>"
+                        />
+                    </div>
+
+                    <div class="text-center">
+                      <button
+                        type="submit"
+                        class="inline-block w-full px-6 py-3 mt-6 mb-2 font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer active:opacity-85 hover:scale-102 hover:shadow-soft-xs leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 bg-gradient-to-tl from-gray-900 to-slate-800 hover:border-slate-700 hover:bg-slate-700 hover:text-white">
+                        update
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+      
+ <%- include("./partials/footer") %>
+    

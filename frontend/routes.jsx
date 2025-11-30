@@ -26,6 +26,8 @@ import AddProduct from "./src/Pages/admin/AddProduct";
 import ProductDetails from "./src/Pages/dashboard/ProductDetails";
 import Success from "./src/Pages/dashboard/Success";
 import Failure from "./src/Pages/dashboard/Failure";
+import ForgetPassword from "./src/Pages/ForgetPassword";
+import ResetPassword from "./src/Pages/ResetPassword";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup />,
+      },
+      {
+        path: "/forget-password",
+        element: <ForgetPassword />,
+      },
+      {
+        path: "/reset-password/:id",
+        element: <ResetPassword />,
       },
     ],
   },
@@ -90,62 +100,6 @@ const router = createBrowserRouter([
       {
         path: "failure",
         element: <Failure />,
-      },
-    ],
-  },
-  {
-    path: "/admin",
-    element: <Adminlayout />,
-    children: [
-      {
-        path: "dashboard",
-        index: true,
-        element: <Dashboard />,
-      },
-      {
-        path: "platforms",
-        element: <Platforms />,
-      },
-      {
-        path: "games",
-        element: <Games />,
-      },
-      {
-        path: "users",
-        element: <Users />,
-      },
-      {
-        path: "communities",
-        element: <AdminCommunities />,
-      },
-      {
-        path: "tournaments",
-        element: <AdminTournaments />,
-      },
-      {
-        path: "products",
-        element: <Products />,
-      },
-      {
-        path: "products/:id",
-        element: <ProductDetails />,
-      },
-      {
-        path: "addproduct",
-        element: <AddProduct />,
-      },
-
-      {
-        path: "orders",
-        element: <Orders />,
-      },
-      {
-        path: "orders/:id",
-        element: <OrderDetails />,
-      },
-      {
-        path: "users/:id",
-        element: <UserDetails />,
       },
     ],
   },

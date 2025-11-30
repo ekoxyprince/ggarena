@@ -115,7 +115,10 @@ function Login() {
                   Remember me
                 </span>
               </div>
-              <Link className="text-[14px] sm:text-[15.5px] text-white/80 hover:text-primary transition">
+              <Link
+                to={"/forget-password"}
+                className="text-[14px] sm:text-[15.5px] text-white/80 hover:text-primary transition"
+              >
                 Forgotten Password?
               </Link>
             </div>
