@@ -7,7 +7,7 @@
   "scripts": {
     "test": "mocha",
     "dev": "nodemon",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "build": "npm install && npm install --force --prefix frontend && npm run build --prefix frontend",
     "start": "cross-env NODE_ENV=production node backend/server.js",
     "conc": "concurrently \"npm run dev\" \"npm run dev --prefix frontend \"  "
   },
@@ -35,6 +35,7 @@
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^5.0.0",
     "cors": "^2.8.5",
+    "cross-env": "^10.1.0",
     "dotenv": "^17.2.2",
     "ejs": "^3.1.10",
     "express": "^5.1.0",

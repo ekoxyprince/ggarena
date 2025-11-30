@@ -2,6 +2,7 @@ import User from "../../database/models/user.js";
 import { BadrequestError } from "../../http/exceptions/error.js";
 import Crypto from "node:crypto";
 import defaultMailOptions from "../../utils/mail/default-mailoption.js";
+import env from "../../config/env.js";
 
 export default async (email) => {
   const user = await User.findOne({ email });
@@ -18,7 +19,7 @@ export default async (email) => {
     user.fullname,
     user.email,
     "Password Reset",
-    `Click the link to reset Password <a href="https://ggarena.gg/reset-password/${resetToken}">Reset</a>`
+    `Click the link to reset Password <a href="https://${env.origins[1]}/reset-password/${resetToken}">Reset</a>`
   );
   return resetToken;
 };

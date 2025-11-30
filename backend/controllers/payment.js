@@ -5,5 +5,5 @@ import catchAsync from "../utils/catchAsync.js";
 export const create = catchAsync(async (req, res) => {
   const payment = await createPayment(req.query);
   const directUrl = payment.status == "success" ? "/success" : "failure";
-  res.redirect(env.origins[0] + directUrl);
+  res.redirect(env.origins[1] + directUrl);
 });
