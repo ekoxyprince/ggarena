@@ -223,7 +223,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <% latestTournaments.forEach(t => { %>
+                      <% latestTournaments?.forEach(t => { %>
                        <tr>
                         <td
                           class="p-2 align-middle bg-transparent border-b whitespace-nowrap"
@@ -247,7 +247,7 @@
                           class="p-2 align-middle bg-transparent border-b whitespace-nowrap"
                         >
                         <div class="mt-2 avatar-group">
-                        <% t.participants.forEach(p => { %>
+                        <% t.participants?.forEach(p => { %>
                          
                               <a
                                 href="javascript:;"
