@@ -120,13 +120,6 @@ function UserNav({ user }) {
         >
           {mobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
         </button>
-        <button
-          onClick={toggleSidebar}
-          className="sm:hidden text-white focus:outline-none ml-2"
-          aria-label="Toggle Sidebar"
-        >
-          <FaEllipsisV size={18} />
-        </button>
       </div>
 
       {/* Mobile Dropdown */}

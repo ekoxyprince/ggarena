@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import UserSideNav from "../../Components/UserSideNav";
 import { GlobalProvider } from "../../contexts/GlobalContext";
 import useFetch from "../../hooks/useFetch";
+import FloatingButton from "../../Components/FloatingButton";
 
 function DashboardLayout() {
   const { data, refetch } = useFetch({
@@ -13,6 +14,7 @@ function DashboardLayout() {
   return (
     <GlobalProvider>
       <div className="w-[100%]">
+        <FloatingButton />
         <UserNav user={data} />
         <div className="dashboard-content bg-red !bg-[#1F1F1F] min-h-screen w-full">
           <UserSideNav user={data} />

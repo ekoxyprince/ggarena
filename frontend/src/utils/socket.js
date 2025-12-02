@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 
-const socket = io("http://194.163.168.60:3000", {
+const socket = io("https://ggarena.gg", {
   autoConnect: false,
   auth: {
     token: null,
