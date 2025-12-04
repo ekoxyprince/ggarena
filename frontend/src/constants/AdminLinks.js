@@ -48,4 +48,9 @@ export default [
     Icon: IoCartSharp,
     url: "/admin/orders",
   },
+  {
+    title: "Payments",
+    Icon: FaChartPie,
+    url: "/admin/payments",
+  },
 ];
