@@ -43,7 +43,12 @@ function Discord() {
 
       {/* Right side button */}
       <div className="w-full sm:w-auto flex justify-center sm:justify-end">
-        <Link to="/signup">
+        <a
+          href="https://discord.gg/Vpa9TBg2Uy"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ zIndex: 1000 }}
+        >
           <CustomButton
             text="Join our Discord"
             className="
@@ -59,7 +64,7 @@ function Discord() {
               mt-2 sm:mt-0
             "
           />
-        </Link>
+        </a>
       </div>
     </div>
   );

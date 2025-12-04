@@ -124,7 +124,8 @@
     radial-gradient(200.16% 172.82% at -17.06% 162.5%, #0d2c7c 0, #030202 100%);
   background-blend-mode: exclusion, normal;
   display: flex;
-  width: 380px;
+  width: 100%;
+  max-width: 380px;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;

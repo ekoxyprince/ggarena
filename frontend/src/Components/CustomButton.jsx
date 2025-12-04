@@ -5,7 +5,7 @@ function CustomButton({ text, className, onPress, isDisabled = false }) {
     <button
       disabled={isDisabled}
       onClick={onPress}
-      className={`rounded-xl py-[0.4rem] px-2 hover:opacity-[90%] font-normal md:font-semibold ${className}`}
+      className={`rounded-xl py-[0.4rem] px-2 hover:opacity-[90%] font-normal md:font-semibold ${className} z-[100000]`}
     >
       {text}
     </button>

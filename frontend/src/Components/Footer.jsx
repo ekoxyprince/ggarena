@@ -4,8 +4,8 @@ import { Images } from "../assets/Images";
 
 function Footer() {
   return (
-    <footer className="footer sm:footer-horizontal  text-neutral-content items-center px-[60px] p-4">
-      <aside className="grid-flow-col items-center">
+    <footer className="footer sm:footer-horizontal text-neutral-content items-center px-4 sm:px-[30px] md:px-[60px] py-4 flex flex-col sm:flex-row gap-4 sm:gap-0 justify-between">
+      <aside className="grid-flow-col items-center justify-center sm:justify-start">
         <Link to="/">
           <img src={Images.logo} alt="" className="logo w-[7.5rem]" />
         </Link>

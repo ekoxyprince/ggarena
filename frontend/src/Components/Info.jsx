@@ -2,10 +2,11 @@ import React from "react";
 import Section from "./Section";
 import { Images } from "../assets/Images";
 import CustomButton from "./CustomButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Discord from "./Discord";
 
 function Info() {
+  const navigate = useNavigate();
   return (
     <div className="bg-[#140e28] w-full py-[40px] sm:py-[50px] mt-[0px]">
       <div
@@ -41,17 +42,16 @@ function Info() {
               tournaments. Connect with the passionate professionals making it
               happen.
             </p>
-            <Link>
-              <CustomButton
-                text="Learn More"
-                className="bg-primary text-secondary w-[120px] sm:w-32 h-[38px] sm:h-[43px] !rounded-md"
-              />
-            </Link>
+            <CustomButton
+              onPress={() => navigate("/about")}
+              text="Learn More"
+              className="bg-primary text-secondary w-[120px] sm:w-32 h-[38px] sm:h-[43px] !rounded-md"
+            />
           </div>
         </div>
 
         {/* RIGHT SECTION */}
-        <div className="right flex flex-col gap-[20px] w-full max-w-[530px] h-auto lg:h-full">
+        <div className="right flex flex-col gap-[20px] w-full max-w-full h-auto lg:h-full">
           {/* TOP CARD */}
           <div
             className="
@@ -78,12 +78,11 @@ function Info() {
                 Explore a variety of free tournaments, connect with a thriving
                 community, and monetize your passion.
               </p>
-              <Link>
-                <CustomButton
-                  text="Get Started"
-                  className="border-[1.5px] border-primary !font-normal text-white w-[110px] sm:w-28 h-[36px] sm:h-[40px] !rounded-md"
-                />
-              </Link>
+              <CustomButton
+                onPress={() => navigate("/signup")}
+                text="Get Started"
+                className="border-[1.5px] border-primary !font-normal text-white w-[110px] sm:w-28 h-[36px] sm:h-[40px] !rounded-md"
+              />
             </div>
           </div>
 
@@ -113,12 +112,11 @@ function Info() {
                 Effortlessly manage tournaments of any size. Benefit from quick
                 setup, immediate player payments, and advanced admin tooling.
               </p>
-              <Link>
-                <CustomButton
-                  text="Get Started"
-                  className="border-[1.5px] border-primary !font-normal text-white w-[110px] sm:w-28 h-[36px] sm:h-[40px] !rounded-md"
-                />
-              </Link>
+              <CustomButton
+                onPress={() => navigate("/signup")}
+                text="Get Started"
+                className="border-[1.5px] border-primary !font-normal text-white w-[110px] sm:w-28 h-[36px] sm:h-[40px] !rounded-md"
+              />
             </div>
           </div>
         </div>

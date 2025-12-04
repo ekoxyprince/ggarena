@@ -2,9 +2,10 @@ import React from "react";
 import Section from "./Section";
 import { Images } from "../assets/Images";
 import CustomButton from "./CustomButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Hero() {
+  const navigate = useNavigate();
   return (
     <div
       className={`hero bg-cover bg-no-repeat bg-center h-fit relative`}
@@ -29,12 +30,12 @@ function Hero() {
             fair.
           </p>
 
-          <Link to="/signup">
-            <CustomButton
-              text="Join the Action"
-              className="bg-primary btt text-secondary mt-[25px] sm:mt-[30px] w-[170px] sm:w-[200px] h-[48px] sm:h-[52px] font-syne text-[0.9rem] sm:text-[0.95rem] font-extrabold uppercase"
-            />
-          </Link>
+          <CustomButton
+            onPress={() => navigate("/signup")}
+            isDisabled={false}
+            text="Join the Action"
+            className="bg-primary btt text-secondary mt-[25px] sm:mt-[30px] w-[170px] sm:w-[200px] h-[48px] sm:h-[52px] font-syne text-[0.9rem] sm:text-[0.95rem] font-extrabold uppercase"
+          />
         </div>
 
         {/* Bottom Image */}

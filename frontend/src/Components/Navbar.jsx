@@ -10,10 +10,10 @@ function Navbar() {
   return (
     <nav
       id="header"
-      className="w-full py-[15px] px-4 sm:px-[30px] md:px-[60px] shadow-xl flex justify-between items-center bg-[#0e0e0e] relative z-50"
+      className="w-full py-[15px] px-4 sm:px-[30px] md:px-[60px] shadow-xl flex items-center justify-between bg-[#0e0e0e] relative z-50"
     >
       {/* Logo */}
-      <Link to="/" className="shrink-0">
+      <Link to="/" className="shrink-0 flex items-center">
         <img
           src={Images.logo}
           alt="Logo"
@@ -21,7 +21,9 @@ function Navbar() {
         />
       </Link>
 
-      {/* Desktop Buttons */}
+      {/* Center nav links - desktop */}
+
+      {/* Desktop auth buttons */}
       <div className="hidden sm:flex gap-3 items-center">
         <Link to="/login">
           <CustomButton
@@ -37,7 +39,7 @@ function Navbar() {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setMenuOpen((prev) => !prev)}
-        className="sm:hidden text-white focus:outline-none"
+        className="sm:hidden text-white focus:outline-none ml-2"
         aria-label="Toggle menu"
       >
         {menuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
@@ -46,6 +48,20 @@ function Navbar() {
       {/* Mobile Dropdown Menu */}
       {menuOpen && (
         <div className="absolute top-full left-0 w-full bg-nav flex flex-col items-center gap-4 py-4 sm:hidden shadow-md animate-slideDown">
+          <Link
+            to="/"
+            onClick={() => setMenuOpen(false)}
+            className="w-[85%] text-center text-white"
+          >
+            Home
+          </Link>
+          <Link
+            to="/about"
+            onClick={() => setMenuOpen(false)}
+            className="w-[85%] text-center text-white"
+          >
+            About
+          </Link>
           <Link
             to="/login"
             onClick={() => setMenuOpen(false)}
