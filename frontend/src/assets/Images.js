@@ -13,10 +13,10 @@ import BBG2 from "./Images/headerBG2.png";
 import community from "./Images/community.jpg";
 import tor from "./Images/tor.jpg";
 import User from "./Images/User.jpg";
-import star from "./Images/Star.png"; 
-import comm from "./Images/com.png"; 
-import turna from "./Images/turna.png"; 
-import gameOver from "./Images/game_over.png"; 
+import star from "./Images/Star.png";
+import comm from "./Images/com.png";
+import turna from "./Images/turna.png";
+import gameOver from "./Images/game_over.png";
 import sword from "./Images/Sword_icon.png";
 import partner1 from "./Images/Partners/partner1.svg";
 import partner2 from "./Images/Partners/partner2.svg";
@@ -39,68 +39,82 @@ import newUser from "./Images/new_user.svg";
 import newUser2 from "./Images/pro.png";
 import newUser3 from "./Images/pro2.png";
 import newUser4 from "./Images/pro3.png";
-import discordBg from "./Images/discordBg.jpg"
-import torBanner1 from "./Images/torBanner1.jpg"
-import torBanner2 from "./Images/torBanner2.jpg"
+import discordBg from "./Images/discordBg.jpg";
+import torBanner1 from "./Images/torBanner1.jpg";
+import torBanner2 from "./Images/torBanner2.jpg";
 import leaderboard from "./Images/leaderboard.png";
 import bannerIMG2 from "./Images/bannerIMG2.png";
 import bannerIMG3 from "./Images/bannerIMG3.png";
 import banner3 from "./Images/3.png";
 import banner2 from "./Images/2.png";
 import banner1 from "./Images/banner1.png";
-import tors from "./Images/tor.webp"
-import comIC from "./Images/comIC.webp"
-export  const Images = {
-    newUser3,
-    newUser4,
-    torBanner1,
-    torBanner2,
-    banner1,
-    banner2,
-    banner3,
-    bannerIMG2,
-    bannerIMG3,
-    newUser2,
-    verified,
-    comIC,
-    tors,
-    leaderboard,
-    logoIc,
-    discordBg,
-    newUser,
-    pad,
-    bar,
-    pre,
-    logo  ,
-    heroBg ,
-    gamesBg ,
-    characterBg,
-    character,
-    avatar,
-    yellowBorder,
-    whiteBorder,
-    blackBorder,
-    blackBorder2,
-    cube,
-    BBG2,
-    BGvideo,
-    cup,
-    people,
-    star,
-    sword,
-    partner1,
-    partner2,
-    partner3,
-    partner4,
-    partner5,
-    partner6,
-    partner7,
-    partner8,
-    User,
-    tor,
-    about,
-    community,
-    comm,
-    turna,
-    gameOver,
-}
+import tors from "./Images/tor.webp";
+import comIC from "./Images/comIC.webp";
+// About page gallery images
+import about1 from "./about/1.jpg";
+import about2 from "./about/2.jpg";
+import about3 from "./about/3.jpg";
+import about4 from "./about/4.jpg";
+import about5 from "./about/5.jpg";
+import about6 from "./about/6.jpg";
+
+export const Images = {
+  newUser3,
+  newUser4,
+  torBanner1,
+  torBanner2,
+  banner1,
+  banner2,
+  banner3,
+  bannerIMG2,
+  bannerIMG3,
+  newUser2,
+  verified,
+  comIC,
+  tors,
+  leaderboard,
+  about1,
+  about2,
+  about3,
+  about4,
+  about5,
+  about6,
+  logoIc,
+  discordBg,
+  newUser,
+  pad,
+  bar,
+  pre,
+  logo,
+  heroBg,
+  gamesBg,
+  characterBg,
+  character,
+  avatar,
+  yellowBorder,
+  whiteBorder,
+  blackBorder,
+  blackBorder2,
+  cube,
+  BBG2,
+  BGvideo,
+  cup,
+  people,
+  star,
+  sword,
+  partner1,
+  partner2,
+  partner3,
+  partner4,
+  partner5,
+  partner6,
+  partner7,
+  partner8,
+  User,
+  tor,
+  about,
+  community,
+  comm,
+  turna,
+  gameOver,
+};

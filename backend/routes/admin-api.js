@@ -11,10 +11,14 @@ router.get("/users", controller.getUsers);
 
 // Communities management
 router.get("/communities", controller.getCommunities);
+router.post("/communities", controller.createCommunityAdmin);
+router.patch("/communities/:id", controller.updateCommunityAdmin);
 router.patch("/communities/:id/status", controller.updateCommunityStatus);
 
-// Tournaments overview
+// Tournaments overview + CRUD
 router.get("/tournaments", controller.getTournaments);
+router.post("/tournaments", controller.createTournamentAdmin);
+router.patch("/tournaments/:id", controller.updateTournamentAdmin);
 
 // Orders management
 router.get("/orders", controller.getOrders);
@@ -22,5 +26,9 @@ router.patch("/orders/:id/status", controller.updateOrderStatus);
 
 // Payments overview
 router.get("/payments", controller.getPayments);
+
+// Users management (points + email)
+router.patch("/users/:id/points", controller.updateUserPoints);
+router.post("/users/:id/email", controller.sendUserEmail);
 
 export default router;

@@ -3,172 +3,232 @@ import Section from "../Components/Section";
 import { Images } from "../assets/Images";
 import CustomButton from "../Components/CustomButton";
 import { Link } from "react-router-dom";
+import { FaDiscord, FaYoutube, FaTwitter, FaInstagram, FaLink } from "react-icons/fa";
 
 function About() {
   return (
     <div className="bg-[#0B0816] text-white pt-[90px] pb-[60px] min-h-screen">
-      {/* Hero / Intro */}
-      <Section className="max-w-6xl mx-auto flex flex-col gap-10">
-        <div className="flex flex-col lg:flex-row items-center gap-10">
-          <div className="flex-1 flex flex-col gap-4 text-center lg:text-left">
-            <p className="text-sm uppercase tracking-[0.2em] text-[#FFD700] font-semibold">
-              About GG Arena Esports
-            </p>
-            <h1 className="font-Oxanium font-semibold text-[32px] sm:text-[42px] md:text-[50px] leading-tight">
-              Powering the next generation of competitive gaming.
-            </h1>
-            <p className="font-syne text-[15px] sm:text-[17px] text-white/85 max-w-xl mx-auto lg:mx-0">
-              GG Arena is built for players, communities, and organizers who want
-              tournaments that are fast, fair, and truly global. From weekend
-              scrims to pro‑level events, we handle the hard parts so you can
-              focus on the game.
-            </p>
-            <div className="flex flex-wrap justify-center lg:justify-start gap-4 mt-4">
-              <Link to="/signup">
-                <CustomButton
-                  text="Get Started"
-                  className="btt text-secondary w-[150px] h-[46px] font-syne text-[0.9rem] font-extrabold uppercase"
-                />
-              </Link>
-              <a
-                href="https://discord.gg/Vpa9TBg2Uy"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <button className="lin-btn bg-transparent !text-white border border-[#FFD700] px-6 py-2 rounded-xl text-[0.9rem] font-medium">
-                  Join our Discord
-                </button>
-              </a>
-            </div>
-          </div>
+      {/* Who We Are */}
+      <Section className="max-w-5xl mx-auto flex flex-col gap-6 px-4 sm:px-6">
+        <p className="text-xs sm:text-sm uppercase tracking-[0.3em] text-[#FFD700] font-semibold text-center sm:text-left">
+          About Us
+        </p>
+        <h1 className="font-Oxanium font-semibold text-[30px] sm:text-[40px] md:text-[46px] leading-tight text-center sm:text-left">
+          Who We Are
+        </h1>
+        <p className="font-syne text-[15px] sm:text-[16px] text-white/85 leading-relaxed">
+          GG Arena is an international esports brand focused on building strong gaming
+          communities across Africa, Europe, and North America.
+        </p>
+        <p className="font-syne text-[15px] sm:text-[16px] text-white/80 leading-relaxed">
+          We host leagues, offline events, creator programs, and we’re developing our
+          gaming platform to make tournaments simple for players, clubs, and organizers.
+        </p>
+        <p className="font-syne text-[15px] sm:text-[16px] text-white/80 leading-relaxed">
+          Our goal is straightforward: <span className="font-semibold">make competitive gaming accessible, organized,
+          and rewarding for everyone.</span>
+        </p>
+      </Section>
 
-          <div className="flex-1 flex justify-center">
-            <div className="relative w-full max-w-[420px] rounded-2xl overflow-hidden holographic-card">
+      {/* What We Do */}
+      <Section className="max-w-5xl mx-auto mt-[40px] flex flex-col gap-10 px-4 sm:px-6">
+        <h2 className="font-Oxanium text-[22px] sm:text-[26px] font-semibold mb-2">
+          What We Do
+        </h2>
+
+        {/* 1. Offline Events & Game Expo Activations */}
+        <div className="grid gap-6 lg:grid-cols-2 items-center">
+          <div className="flex flex-col gap-3 order-2 lg:order-1">
+            <h3 className="font-Oxanium text-[18px] sm:text-[20px] font-semibold">
+              1. Offline Events &amp; Game Expo Activations
+            </h3>
+            <p className="font-syne text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
+              We’ve organized and supported multiple offline events across Nigeria including:
+            </p>
+            <ul className="list-disc list-inside space-y-1 text-[14px] sm:text-[15px] text-white/80">
+              <li>₦500,000 EA FC &amp; Mortal Kombat tournaments</li>
+              <li>National gaming expos with hundreds of players and spectators</li>
+              <li>Creator meetups and community activations</li>
+            </ul>
+          </div>
+          <div className="grid grid-cols-2 gap-3 order-1 lg:order-2">
+            <img
+              src={Images.about1}
+              alt="Offline tournament event"
+              className="w-full h-[150px] sm:h-[190px] rounded-2xl object-cover"
+            />
+            <img
+              src={Images.about2}
+              alt="Gaming expo activation"
+              className="w-full h-[150px] sm:h-[190px] rounded-2xl object-cover"
+            />
+          </div>
+        </div>
+
+        {/* 2. Pro Clubs League (Season 1–3) */}
+        <div className="grid gap-6 lg:grid-cols-2 items-center">
+          <div className="order-1">
+            <img
+              src={Images.about3}
+              alt="Pro Clubs League action"
+              className="w-full h-[190px] sm:h-[230px] rounded-2xl object-cover"
+            />
+          </div>
+          <div className="flex flex-col gap-3 order-2">
+            <h3 className="font-Oxanium text-[18px] sm:text-[20px] font-semibold">
+              2. Pro Clubs League (Season 1–3)
+            </h3>
+            <p className="font-syne text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
+              We’ve built one of the most consistent Pro Clubs systems in NA/EU, with:
+            </p>
+            <ul className="list-disc list-inside space-y-1 text-[14px] sm:text-[15px] text-white/80">
+              <li>3 seasons</li>
+              <li>13+ teams per season</li>
+              <li>Prize pools, MVP awards, Golden Boot, weekly highlights</li>
+              <li>Storylines, match recaps, and community engagement</li>
+            </ul>
+            <p className="font-syne text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
+              This league is now a core part of the GG Arena identity.
+            </p>
+          </div>
+        </div>
+
+        {/* 3. CODM Community Engagement */}
+        <div className="grid gap-6 lg:grid-cols-2 items-center">
+          <div className="flex flex-col gap-3 order-2 lg:order-1">
+            <h3 className="font-Oxanium text-[18px] sm:text-[20px] font-semibold">
+              3. CODM Community Engagement
+            </h3>
+            <p className="font-syne text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
+              We’ve maintained a consistent CODM presence with:
+            </p>
+            <ul className="list-disc list-inside space-y-1 text-[14px] sm:text-[15px] text-white/80">
+              <li>Monthly scrims</li>
+              <li>Community tournaments</li>
+              <li>Cross-region participation</li>
+            </ul>
+            <p className="font-syne text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
+              This is the start of our mobile esports expansion.
+            </p>
+          </div>
+          <div className="order-1 lg:order-2">
+            <img
+              src={Images.about4}
+              alt="CODM community engagement"
+              className="w-full h-[190px] sm:h-[230px] rounded-2xl object-cover"
+            />
+          </div>
+        </div>
+
+        {/* 4. Creator & Media Content */}
+        <div className="grid gap-6 lg:grid-cols-2 items-center">
+          <div className="order-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <img
-                src={Images.about}
-                alt="Players competing in an esports tournament"
-                className="w-full h-full object-cover"
+                src={Images.about5}
+                alt="Creator and media content 1"
+                className="w-full h-[160px] sm:h-[190px] rounded-2xl object-cover"
+              />
+              <img
+                src={Images.about6}
+                alt="Creator and media content 2"
+                className="w-full h-[160px] sm:h-[190px] rounded-2xl object-cover"
               />
             </div>
           </div>
-        </div>
-      </Section>
-
-      {/* Stats / Highlights */}
-      <Section className="max-w-6xl mx-auto mt-[40px]">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-          <div className="bg-card rounded-xl p-5 text-center flex flex-col gap-1">
-            <p className="text-[28px] sm:text-[32px] font-bold text-[#FFD700]">
-              10K+
+          <div className="flex flex-col gap-3 order-2">
+            <h3 className="font-Oxanium text-[18px] sm:text-[20px] font-semibold">
+              4. Creator &amp; Media Content
+            </h3>
+            <p className="font-syne text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
+              We produce:
             </p>
-            <p className="text-[14px] sm:text-[15px] text-white/80">Registered players</p>
-            <p className="text-[13px] text-white/60">
-              Growing community of casual and competitive gamers across multiple titles.
-            </p>
-          </div>
-
-          <div className="bg-card rounded-xl p-5 text-center flex flex-col gap-1">
-            <p className="text-[28px] sm:text-[32px] font-bold text-[#FFD700]">
-              500+
-            </p>
-            <p className="text-[14px] sm:text-[15px] text-white/80">Tournaments hosted</p>
-            <p className="text-[13px] text-white/60">
-              From grassroots cups to seasonal leagues organized by trusted hosts.
-            </p>
-          </div>
-
-          <div className="bg-card rounded-xl p-5 text-center flex flex-col gap-1">
-            <p className="text-[28px] sm:text-[32px] font-bold text-[#FFD700]">
-              24/7
-            </p>
-            <p className="text-[14px] sm:text-[15px] text-white/80">Global platform</p>
-            <p className="text-[13px] text-white/60">
-              Built for international players with secure payments and live tools.
+            <ul className="list-disc list-inside space-y-1 text-[14px] sm:text-[15px] text-white/80">
+              <li>Player highlights</li>
+              <li>Live coverage</li>
+              <li>Interviews</li>
+              <li>Social content around players, clubs, and events</li>
+            </ul>
+            <p className="font-syne text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
+              Your creative output shows fans and sponsors that GG Arena doesn’t just host
+              matches — you create stories.
             </p>
           </div>
         </div>
       </Section>
 
-      {/* Mission & Values */}
-      <Section className="max-w-6xl mx-auto mt-[50px] flex flex-col lg:flex-row gap-10 items-start">
-        <div className="flex-1 flex flex-col gap-4">
-          <h2 className="font-Oxanium text-[24px] sm:text-[28px] font-semibold">
-            Our mission
-          </h2>
-          <p className="font-syne text-[15px] sm:text-[16px] text-white/80 leading-relaxed">
-            We’re on a mission to make esports accessible to everyone. Whether
-            you’re a solo grinder, a team captain, or a community manager, GG
-            Arena gives you the tools to create, manage, and grow tournaments
-            without needing a full dev team behind you.
-          </p>
-          <p className="font-syne text-[15px] sm:text-[16px] text-white/80 leading-relaxed">
-            Transparency, competitive integrity, and community are at the core of
-            what we build. We’re constantly iterating with feedback from players
-            and organizers to keep the experience smooth and rewarding.
-          </p>
-        </div>
-
-        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="gradient-border-box h-full flex flex-col gap-2 justify-between">
-            <h3 className="text-[16px] font-semibold text-[#FFD700]">For Players</h3>
-            <p className="text-[14px] text-white/80">
-              Discover new tournaments, join in a few clicks, track your results,
-              and get rewarded instantly when you win.
-            </p>
-          </div>
-          <div className="gradient-border-box h-full flex flex-col gap-2 justify-between">
-            <h3 className="text-[16px] font-semibold text-[#FFD700]">
-              For Organizers
-            </h3>
-            <p className="text-[14px] text-white/80">
-              Automate brackets, payouts, and communications so you can spend more
-              time growing your community.
-            </p>
-          </div>
-          <div className="gradient-border-box h-full flex flex-col gap-2 justify-between">
-            <h3 className="text-[16px] font-semibold text-[#FFD700]">
-              For Communities
-            </h3>
-            <p className="text-[14px] text-white/80">
-              Build hubs around your favorite titles, with events, announcements,
-              and Discord integrations that keep everyone engaged.
-            </p>
-          </div>
-          <div className="gradient-border-box h-full flex flex-col gap-2 justify-between">
-            <h3 className="text-[16px] font-semibold text-[#FFD700]">
-              For Brands & Partners
-            </h3>
-            <p className="text-[14px] text-white/80">
-              Reach highly engaged players with sponsored events, prize pools, and
-              custom campaigns.
-            </p>
-          </div>
-        </div>
+      {/* Our Vision */}
+      <Section className="max-w-5xl mx-auto mt-[50px] flex flex-col gap-4 px-4 sm:px-6">
+        <h2 className="font-Oxanium text-[22px] sm:text-[26px] font-semibold">
+          Our Vision
+        </h2>
+        <p className="font-syne text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
+          A connected esports network that supports Africa and the global gaming scene
+          through:
+        </p>
+        <ul className="list-disc list-inside space-y-1 text-[14px] sm:text-[15px] text-white/80">
+          <li>Technology</li>
+          <li>Community</li>
+          <li>Competitions</li>
+          <li>Opportunities for creators &amp; pro players</li>
+        </ul>
       </Section>
 
-      {/* Final CTA */}
-      <Section className="max-w-4xl mx-auto mt-[60px] text-center">
-        <div className="rounded-2xl bg-radial-main py-10 px-6 flex flex-col gap-4 items-center">
-          <h2 className="font-Oxanium text-[24px] sm:text-[30px] font-semibold">
-            Ready to host or join your next tournament?
-          </h2>
-          <p className="font-syne text-[14px] sm:text-[16px] text-white/80 max-w-2xl">
-            Start for free in minutes. Create your first event, invite your
-            community, and let GG Arena handle the rest.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 mt-2">
-            <Link to="/signup">
-              <CustomButton
-                text="Create an account"
-                className="btt text-secondary w-[190px] h-[48px] font-syne text-[0.9rem] font-extrabold uppercase"
-              />
-            </Link>
-            <Link to="/login">
-              <button className="lin-btn bg-transparent !text-white border border-[#FFD700] px-6 py-2 rounded-xl text-[0.9rem] font-medium">
-                Log in instead
-              </button>
-            </Link>
-          </div>
+      {/* Connect With Us */}
+      <Section className="max-w-5xl mx-auto mt-[40px] flex flex-col gap-4 px-4 sm:px-6">
+        <h2 className="font-Oxanium text-[22px] sm:text-[26px] font-semibold">
+          Connect With Us
+        </h2>
+        <p className="font-syne text-[14px] sm:text-[15px] text-white/80">
+          Stay plugged into everything GG Arena is building across tournaments,
+          creators, and community events.
+        </p>
+        <div className="flex flex-wrap gap-3 mt-2">
+          <a
+            href="https://linktr.ee/ggarena100"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#FFD700]/60 text-[13px] sm:text-[14px] text-white/90 hover:bg-[#FFD700]/10 transition-colors"
+          >
+            <FaLink className="text-[#FFD700]" />
+            <span>Linktree</span>
+          </a>
+          <a
+            href="https://discord.gg/Vpa9TBg2Uy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-full border border-[#5865F2]/60 text-[13px] sm:text-[14px] text-white/90 hover:bg-[#5865F2]/20 transition-colors"
+          >
+            <FaDiscord className="text-[#5865F2]" />
+            <span>Discord</span>
+          </a>
+          <a
+            href="https://www.youtube.com/@ggarenaesport"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/40 text-[13px] sm:text-[14px] text-white/90 hover:bg-white/10 transition-colors"
+          >
+            <FaYoutube className="text-[#FF0000]" />
+            <span>YouTube</span>
+          </a>
+          <a
+            href="https://x.com/ggarenaesport?s=21"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/40 text-[13px] sm:text-[14px] text-white/90 hover:bg-white/10 transition-colors"
+          >
+            <FaTwitter className="text-[#e5e5e5]" />
+            <span>X (Twitter)</span>
+          </a>
+          <a
+            href="https://www.instagram.com/ggarenaesport?igsh=MWZicnd4OXM5MGxmNQ=="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/40 text-[13px] sm:text-[14px] text-white/90 hover:bg-white/10 transition-colors"
+          >
+            <FaInstagram className="text-pink-400" />
+            <span>Instagram</span>
+          </a>
         </div>
       </Section>
     </div>

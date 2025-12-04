@@ -5,7 +5,8 @@ import {
 import Community from "../database/models/community.js";
 
 export const isUser = (req, res, next) => {
-  if (req.user.role !== "user") {
+  // Allow regular users and admins to act on "user"-level routes
+  if (!["user", "admin"].includes(req.user.role)) {
     throw new AuthorizationError("Forbidden");
   }
   next();
@@ -23,7 +24,11 @@ export const isCommunityAdmin = async (req, res, next) => {
     if (!commuity) {
       throw new BadrequestError("Invalid community");
     }
-    if (commuity.createdBy.toString() !== req.user._id.toString()) {
+    // Allow the community creator OR a platform admin to manage community resources
+    if (
+      commuity.createdBy.toString() !== req.user._id.toString() &&
+      req.user.role !== "admin"
+    ) {
       throw new AuthorizationError("Forbidden");
     }
     next();

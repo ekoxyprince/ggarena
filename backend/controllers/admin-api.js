@@ -4,6 +4,7 @@ import Tournament from "../database/models/tournament.js";
 import Community from "../database/models/community.js";
 import Order from "../database/models/order.js";
 import Payment from "../database/models/payment.js";
+import MailOptions from "../utils/mail/default-mailoption.js";
 
 const getPaginationParams = (req) => {
   const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
@@ -180,6 +181,200 @@ export const getTournaments = catchAsync(async (req, res) => {
   });
 });
 
+// Admin: create community (admin becomes community admin)
+export const createCommunityAdmin = catchAsync(async (req, res) => {
+  const {
+    name,
+    image,
+    cover,
+    officialEmail,
+    discordChannel,
+    description,
+    maxUsers,
+  } = req.body;
+
+  if (!name || !image || !cover || !officialEmail || !discordChannel || !description) {
+    return res.status(400).json({
+      success: false,
+      message:
+        "Missing required fields: name, image, cover, officialEmail, discordChannel, description",
+    });
+  }
+
+  const user = await User.findById(req.user._id);
+
+  const community = await Community.create({
+    name,
+    image,
+    cover,
+    officialEmail,
+    discordChannel,
+    description,
+    maxUsers: maxUsers || 100,
+    participants: [
+      {
+        user: user._id,
+        isAdmin: true,
+      },
+    ],
+    createdBy: user._id,
+  });
+
+  user.communitiesCreated += 1;
+  await user.save();
+
+  res.status(201).json({
+    success: true,
+    message: "Community created",
+    data: community,
+  });
+});
+
+// Admin: update community details
+export const updateCommunityAdmin = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const allowedFields = [
+    "name",
+    "image",
+    "cover",
+    "officialEmail",
+    "discordChannel",
+    "maxUsers",
+    "description",
+    "isVerified",
+  ];
+
+  const update = {};
+  allowedFields.forEach((field) => {
+    if (req.body[field] !== undefined) update[field] = req.body[field];
+  });
+
+  const community = await Community.findByIdAndUpdate(id, update, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!community) {
+    return res
+      .status(404)
+      .json({ success: false, message: "Community not found" });
+  }
+
+  res.status(200).json({
+    success: true,
+    message: "Community updated",
+    data: community,
+  });
+});
+
+// Admin: create tournament for any community
+export const createTournamentAdmin = catchAsync(async (req, res) => {
+  const {
+    name,
+    mode,
+    game,
+    totalParticipants,
+    price,
+    currency,
+    overview,
+    rules,
+    image,
+    hostedBy,
+  } = req.body;
+
+  if (
+    !name ||
+    !mode ||
+    !game ||
+    !totalParticipants ||
+    !price ||
+    !currency ||
+    !overview ||
+    !rules ||
+    !image ||
+    !hostedBy
+  ) {
+    return res.status(400).json({
+      success: false,
+      message:
+        "Missing required fields: name, mode, game, totalParticipants, price, currency, overview, rules, image, hostedBy",
+    });
+  }
+
+  const community = await Community.findById(hostedBy);
+  if (!community) {
+    return res
+      .status(404)
+      .json({ success: false, message: "Host community not found" });
+  }
+
+  // Credit the community owner for a new tournament
+  const owner = await User.findById(community.createdBy.toString());
+  if (owner) {
+    owner.tournamentsCreated += 1;
+    await owner.save();
+  }
+
+  const tournament = await Tournament.create({
+    name,
+    mode,
+    game,
+    totalParticipants,
+    price,
+    currency,
+    overview,
+    rules,
+    image,
+    hostedBy,
+  });
+
+  res.status(201).json({
+    success: true,
+    message: "Tournament created",
+    data: tournament,
+  });
+});
+
+// Admin: update tournament details
+export const updateTournamentAdmin = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const allowedFields = [
+    "name",
+    "mode",
+    "game",
+    "totalParticipants",
+    "price",
+    "currency",
+    "overview",
+    "rules",
+    "image",
+    "status",
+    "isActive",
+  ];
+
+  const update = {};
+  allowedFields.forEach((field) => {
+    if (req.body[field] !== undefined) update[field] = req.body[field];
+  });
+
+  const tournament = await Tournament.findByIdAndUpdate(id, update, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!tournament) {
+    return res
+      .status(404)
+      .json({ success: false, message: "Tournament not found" });
+  }
+
+  res.status(200).json({
+    success: true,
+    message: "Tournament updated",
+    data: tournament,
+  });
+});
+
 // Orders + related payment/community/product (paginated + basic search by status)
 export const getOrders = catchAsync(async (req, res) => {
   const { page, limit, skip } = getPaginationParams(req);
@@ -250,5 +445,56 @@ export const getPayments = catchAsync(async (req, res) => {
     success: true,
     message: "Payments retrieved",
     data: buildPaginatedData(payments, total, page, limit),
+  });
+});
+
+// Admin: update user points (add/deduct or set)
+export const updateUserPoints = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const { points, delta } = req.body;
+
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404).json({ success: false, message: "User not found" });
+  }
+
+  if (typeof points === "number") {
+    user.points = points;
+  } else if (typeof delta === "number") {
+    user.points += delta;
+  }
+
+  await user.save();
+
+  res.status(200).json({
+    success: true,
+    message: "User points updated",
+    data: { _id: user._id, points: user.points },
+  });
+});
+
+// Admin: send email to a user
+export const sendUserEmail = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const { subject, message } = req.body;
+
+  if (!subject || !message) {
+    return res.status(400).json({
+      success: false,
+      message: "Subject and message are required",
+    });
+  }
+
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404).json({ success: false, message: "User not found" });
+  }
+
+  // Fire-and-forget using existing mail helper; errors are logged inside helper
+  MailOptions(user.fullname, user.email, subject, message);
+
+  res.status(200).json({
+    success: true,
+    message: "Email queued for sending",
   });
 });

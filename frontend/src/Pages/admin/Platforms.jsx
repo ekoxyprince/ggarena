@@ -137,8 +137,22 @@ function Platforms() {
             {platforms.map((platform) => (
               <TableRow key={platform._id}>
                 <TableCell>{platform.name}</TableCell>
-                <TableCell className="max-w-xs truncate text-xs">
-                  {platform.image}
+                <TableCell>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-md overflow-hidden bg-slate-800">
+                      {platform.image ? (
+                        <img
+                          src={platform.image}
+                          alt={platform.name}
+                          className="w-full h-full object-cover object-center"
+                        />
+                      ) : (
+                        <span className="text-[10px] text-slate-400 flex items-center justify-center w-full h-full">
+                          No image
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </TableCell>
                 <TableCell>
                   <button

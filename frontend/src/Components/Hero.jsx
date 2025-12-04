@@ -18,16 +18,15 @@ function Hero() {
         {/* Top Section */}
         <div className="top flex flex-col gap-3 justify-top mt-[70px] sm:mt-[100px] items-center text-center">
           <h1 className="font-semibold font-Oxanium text-[34px] sm:text-[45px] md:text-[60px] text-white leading-tight">
-            Tournament Management Made
+            Build Your Gaming Community.
           </h1>
           <h1 className="font-semibold font-Oxanium text-[34px] sm:text-[45px] md:text-[60px] text-[#ffd700] leading-tight -mt-2 sm:-mt-3">
-            Simple For Everyone
+            Run Tournaments. Grow Together.
           </h1>
 
           <p className="font-syne text-center max-w-[90%] sm:max-w-[70%] md:max-w-[55%] text-[15px] sm:text-[18px] md:text-[20px] text-white/90 mt-3">
-            Create tournaments, manage teams, chat with players, and track
-            matches live. GG Arena makes competitive gaming smooth, fun, and
-            fair.
+            Create a branded hub, host leagues and ladders, manage payouts, and
+            go live on one platform.
           </p>
 
           <CustomButton
