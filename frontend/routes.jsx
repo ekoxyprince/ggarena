@@ -23,6 +23,7 @@ import Orders from "./src/Pages/admin/Orders";
 import OrderDetails from "./src/Pages/admin/OrderDetails";
 import UserDetails from "./src/Pages/admin/UserDetails";
 import AddProduct from "./src/Pages/admin/AddProduct";
+import Payments from "./src/Pages/admin/Payments";
 import ProductDetails from "./src/Pages/dashboard/ProductDetails";
 import Success from "./src/Pages/dashboard/Success";
 import Failure from "./src/Pages/dashboard/Failure";
@@ -100,6 +101,65 @@ const router = createBrowserRouter([
       {
         path: "failure",
         element: <Failure />,
+      },
+    ],
+  },
+  {
+    element: (
+      <Protected>
+        <Adminlayout />
+      </Protected>
+    ),
+    children: [
+      {
+        path: "/admin/dashboard",
+        element: <Dashboard />,
+        index: true,
+      },
+      {
+        path: "/admin/platforms",
+        element: <Platforms />,
+      },
+      {
+        path: "/admin/games",
+        element: <Games />,
+      },
+      {
+        path: "/admin/users",
+        element: <Users />,
+      },
+      {
+        path: "/admin/communities",
+        element: <AdminCommunities />,
+      },
+      {
+        path: "/admin/tournaments",
+        element: <AdminTournaments />,
+      },
+      {
+        path: "/admin/products",
+        element: <Products />,
+      },
+      {
+        path: "/admin/orders",
+        element: <Orders />,
+      },
+      {
+        path: "/admin/payments",
+        element: <Payments />,
+      },
+      // Placeholder routes for potential details / creation pages
+      {
+        path: "/admin/orders/:id",
+        element: <OrderDetails />,
+      },
+      {
+        path: "/admin/users/:id",
+        element: <UserDetails />,
+      },
+      {
+        path: "/admin/products/new",
+        element: <AddProduct />,
       },
     ],
   },

@@ -11,7 +11,6 @@ const Success = () => {
             alt="success-icon"
             className="w-full h-full object-cover"
             style={{
-              imageRendering: "-webkit-optimize-contrast",
               imageRendering: "crisp-edges",
             }}
           />

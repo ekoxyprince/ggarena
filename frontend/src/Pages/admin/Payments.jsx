@@ -10,27 +10,27 @@ import {
 import { Pagination } from "@heroui/react";
 import useFetch from "../../hooks/useFetch";
 
-function Tournaments() {
+function Payments() {
   const [page, setPage] = React.useState(1);
   const [search, setSearch] = React.useState("");
   const rowsPerPage = 10;
 
   const { data: response, isLoading } = useFetch({
-    key: `admin-tournaments-${page}-${search}`,
-    url: `/api/admin/tournaments?page=${page}&limit=${rowsPerPage}&search=${encodeURIComponent(
+    key: `admin-payments-${page}-${search}`,
+    url: `/api/admin/payments?page=${page}&limit=${rowsPerPage}&search=${encodeURIComponent(
       search
     )}`,
   });
 
-  const tournaments = response?.items || [];
+  const payments = response?.items || [];
   const pagination = response?.pagination;
 
   return (
     <div className="flex flex-col space-y-4">
-      <h2 className="text-2xl font-semibold text-slate-100">Tournaments</h2>
+      <h2 className="text-2xl font-semibold text-slate-100">Payments</h2>
       <div className="w-full bg-[#020617] rounded-2xl p-4 border border-slate-800 shadow-sm overflow-x-auto space-y-3">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-slate-400">Overview of active and past tournaments</p>
+          <p className="text-sm text-slate-400">Monitor payment activity</p>
           <input
             type="text"
             value={search}
@@ -38,41 +38,33 @@ function Tournaments() {
               setPage(1);
               setSearch(e.target.value);
             }}
-            placeholder="Search by name or status..."
+            placeholder="Search by name, email, reference, or status..."
             className="w-full max-w-xs rounded-md border border-slate-700 bg-slate-900 px-3 py-1.5 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-sky-500"
           />
         </div>
-        <Table aria-label="Tournaments table">
+        <Table aria-label="Payments table">
           <TableHeader>
-            <TableColumn>NAME</TableColumn>
-            <TableColumn>PARTICIPANTS</TableColumn>
-            <TableColumn>HOSTED BY</TableColumn>
-            <TableColumn>MEMBERS</TableColumn>
-            <TableColumn>PRIZE</TableColumn>
+            <TableColumn>AMOUNT (NGN)</TableColumn>
+            <TableColumn>FULLNAME</TableColumn>
+            <TableColumn>EMAIL</TableColumn>
+            <TableColumn>REFERENCE</TableColumn>
             <TableColumn>STATUS</TableColumn>
-            <TableColumn>CREATED AT</TableColumn>
+            <TableColumn>ORDER ID</TableColumn>
           </TableHeader>
           <TableBody
             isLoading={isLoading}
             emptyContent={
-              isLoading ? "Loading tournaments..." : "No tournaments to display."
+              isLoading ? "Loading payments..." : "No payments to display."
             }
           >
-            {tournaments.map((t) => (
-              <TableRow key={t._id}>
-                <TableCell>{t.name}</TableCell>
-                <TableCell>{t.participants?.length || 0}</TableCell>
-                <TableCell>{t.hostedBy?.name || "-"}</TableCell>
-                <TableCell>
-                  {(t.participants?.length || 0) + "/" + (t.totalParticipants || 0)}
-                </TableCell>
-                <TableCell>
-                  {t.currency} {t.price}
-                </TableCell>
-                <TableCell className="capitalize">{t.status}</TableCell>
-                <TableCell>
-                  {t.createdAt ? new Date(t.createdAt).toLocaleString() : "-"}
-                </TableCell>
+            {payments.map((p) => (
+              <TableRow key={p._id}>
+                <TableCell>{p.amount}</TableCell>
+                <TableCell>{p.fullname}</TableCell>
+                <TableCell>{p.email}</TableCell>
+                <TableCell>{p.reference}</TableCell>
+                <TableCell>{p.status}</TableCell>
+                <TableCell>{p.order}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -93,4 +85,4 @@ function Tournaments() {
   );
 }
 
-export default Tournaments;
+export default Payments;

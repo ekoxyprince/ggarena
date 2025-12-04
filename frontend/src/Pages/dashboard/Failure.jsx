@@ -14,7 +14,6 @@ const Failure = () => {
             alt="warning-icon"
             className="w-20 h-20 object-cover"
             style={{
-              imageRendering: "-webkit-optimize-contrast",
               imageRendering: "crisp-edges",
             }}
           />
