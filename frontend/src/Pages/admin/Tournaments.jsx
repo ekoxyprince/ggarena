@@ -285,7 +285,7 @@ function Tournaments() {
                 className="w-full px-3 py-2 rounded-md bg-[#27272f] border border-[#3f3f46] text-sm outline-none focus:border-primary"
               >
                 <option value="">Select game</option>
-                {games.map((g) => (
+                {games?.map((g) => (
                   <option key={g._id} value={g._id}>
                     {g.name}
                   </option>
@@ -301,7 +301,7 @@ function Tournaments() {
                 className="w-full px-3 py-2 rounded-md bg-[#27272f] border border-[#3f3f46] text-sm outline-none focus:border-primary"
               >
                 <option value="">Select community</option>
-                {communities.map((c) => (
+                {communities?.map((c) => (
                   <option key={c._id} value={c._id}>
                     {c.name}
                   </option>
