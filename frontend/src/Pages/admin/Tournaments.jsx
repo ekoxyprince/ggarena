@@ -189,7 +189,7 @@ function Tournaments() {
               isLoading ? "Loading tournaments..." : "No tournaments to display."
             }
           >
-            {tournaments.map((t) => (
+            {tournaments?.map((t) => (
               <TableRow key={t._id}>
                 <TableCell>
                   <div className="flex items-center gap-3">
