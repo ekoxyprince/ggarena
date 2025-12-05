@@ -62,7 +62,7 @@ store.on("error", function (error) {
 if (process.env.NODE_ENV == "production") {
   let frontendPath = path.join(__dirname, "frontend", "dist");
   app.use(express.static(frontendPath));
-  app.get(/^\/(?!api)(?!admin).*/, (req, res) => {
+  app.get(/^\/(?!api).*/, (req, res) => {
     res.sendFile(path.join(frontendPath, "index.html"));
   });
 }
