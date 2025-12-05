@@ -47,7 +47,7 @@ export default function CommunityModal() {
       <div className=" flex flex-col space-y-4 ">
         <form
           action=""
-          className="my-[60px] px-[20px] py-[40px] border-[2.5px] bg-transparent backdrop-blur-md  rounded-lg relative z-50 mt-[-200px] border-[#303030] max-w-[380px] md:max-w-[550px] mx-auto"
+          className="my-[60px] px-[20px] py-[40px] border-[2.5px] bg-transparent backdrop-blur-md  rounded-lg relative z-50 mt-[50px] border-[#303030] max-w-[380px] md:max-w-[550px] mx-auto"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="flex items-center gap-4 mb-3 justify-center">

@@ -1,9 +1,15 @@
-import React from 'react';
+import React from "react";
 import Section from "../Components/Section";
 import { Images } from "../assets/Images";
 import CustomButton from "../Components/CustomButton";
 import { Link } from "react-router-dom";
-import { FaDiscord, FaYoutube, FaTwitter, FaInstagram, FaLink } from "react-icons/fa";
+import {
+  FaDiscord,
+  FaYoutube,
+  FaTwitter,
+  FaInstagram,
+  FaLink,
+} from "react-icons/fa";
 
 function About() {
   return (
@@ -17,16 +23,27 @@ function About() {
           Who We Are
         </h1>
         <p className="font-syne text-[15px] sm:text-[16px] text-white/85 leading-relaxed">
-          GG Arena is an international esports brand focused on building strong gaming
-          communities across Africa, Europe, and North America.
+          GG Arena is an international esports brand built to connect
+          communities, creators, and competitors across all continents. We’re
+          more than tournaments, we’re building a digital home for gaming
+          communities.
         </p>
         <p className="font-syne text-[15px] sm:text-[16px] text-white/80 leading-relaxed">
-          We host leagues, offline events, creator programs, and we’re developing our
-          gaming platform to make tournaments simple for players, clubs, and organizers.
+          We’ve organized and supported offline and online esports events across
+          multiple continents, from large expo tournaments to long-running Pro
+          Clubs leagues and CODM competitions.
         </p>
         <p className="font-syne text-[15px] sm:text-[16px] text-white/80 leading-relaxed">
-          Our goal is straightforward: <span className="font-semibold">make competitive gaming accessible, organized,
-          and rewarding for everyone.</span>
+          Our goal is simple:{" "}
+          <span className="font-semibold">
+            Make competitive gaming accessible, organized, and rewarding, while
+            giving communities the tools to grow, interact, and build their own
+            identity.
+          </span>
+        </p>
+        <p className="font-syne text-[15px] sm:text-[16px] text-white/80 leading-relaxed">
+          GG Arena is where players compete, creators shine, communities grow,
+          and esports becomes a movement not just an event.
         </p>
       </Section>
 
@@ -43,11 +60,14 @@ function About() {
               1. Offline Events &amp; Game Expo Activations
             </h3>
             <p className="font-syne text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
-              We’ve organized and supported multiple offline events across Nigeria including:
+              We’ve organized and supported multiple offline events across
+              Nigeria including:
             </p>
             <ul className="list-disc list-inside space-y-1 text-[14px] sm:text-[15px] text-white/80">
               <li>₦500,000 EA FC &amp; Mortal Kombat tournaments</li>
-              <li>National gaming expos with hundreds of players and spectators</li>
+              <li>
+                National gaming expos with hundreds of players and spectators
+              </li>
               <li>Creator meetups and community activations</li>
             </ul>
           </div>
@@ -79,7 +99,8 @@ function About() {
               2. Pro Clubs League (Season 1–3)
             </h3>
             <p className="font-syne text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
-              We’ve built one of the most consistent Pro Clubs systems in NA/EU, with:
+              We’ve built one of the most consistent Pro Clubs systems in NA/EU,
+              with:
             </p>
             <ul className="list-disc list-inside space-y-1 text-[14px] sm:text-[15px] text-white/80">
               <li>3 seasons</li>
@@ -150,8 +171,8 @@ function About() {
               <li>Social content around players, clubs, and events</li>
             </ul>
             <p className="font-syne text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
-              Your creative output shows fans and sponsors that GG Arena doesn’t just host
-              matches — you create stories.
+              Your creative output shows fans and sponsors that GG Arena doesn’t
+              just host matches — you create stories.
             </p>
           </div>
         </div>
@@ -163,8 +184,8 @@ function About() {
           Our Vision
         </h2>
         <p className="font-syne text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
-          A connected esports network that supports Africa and the global gaming scene
-          through:
+          A connected esports network that supports Africa and the global gaming
+          scene through:
         </p>
         <ul className="list-disc list-inside space-y-1 text-[14px] sm:text-[15px] text-white/80">
           <li>Technology</li>
@@ -235,4 +256,4 @@ function About() {
   );
 }
 
-export default About
+export default About;
