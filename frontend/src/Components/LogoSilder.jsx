@@ -1,14 +1,22 @@
-
-import React from 'react'
+import React from "react";
 import Slider from "react-infinite-logo-slider";
-import { Images } from '../assets/Images';
+import { Images } from "../assets/Images";
 function LogoSilder() {
-    const logos = [Images.partner1, Images.partner2, Images.partner3, Images.partner4, Images.partner5, Images.partner6, Images.partner7, Images.partner8];
-    console.log(logos)
+  const logos = [
+    Images.partner1,
+    Images.partner2,
+    Images.partner3,
+    Images.partner4,
+    Images.partner5,
+    Images.partner6,
+    Images.partner7,
+    Images.partner8,
+  ];
+  console.log(logos);
   return (
     <div className="py-[40px] bg-[#0B0816] pb-[70px]">
       <h4 className="text-center text-[20px] bg-text font-semibold">
-        Our Sponsors
+        Communities on GGArena.
       </h4>
       <div className="mt-[40px] ">
         <Slider
@@ -29,4 +37,4 @@ function LogoSilder() {
   );
 }
 
-export default LogoSilder
+export default LogoSilder;

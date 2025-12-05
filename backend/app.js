@@ -78,7 +78,7 @@ app.use("/api/orders", auth, orderRoutes);
 // Admin JSON APIs (protected, admin-only)
 app.use("/api/admin", auth, isAdmin, adminApiRoutes);
 // Existing EJS-based admin panel
-app.use("/admin", adminRoutes);
+// app.use("/admin", adminRoutes);
 app.use((req, res) => {
   res.status(404).json({ success: false, message: "Not found!" });
 });

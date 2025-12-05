@@ -122,26 +122,6 @@ function Info() {
           </div>
         </div>
       </div>
-
-      {/* Communities logos placeholder */}
-      <div className="mt-10 max-w-[93%] w-full mx-auto px-4 sm:px-6">
-        <h2 className="text-center text-[20px] sm:text-[22px] font-Oxanium font-semibold text-white">
-          Communities on GG Arena
-        </h2>
-        <p className="mt-2 text-center text-[14px] sm:text-[15px] text-white/70">
-          Some Popular Communities in GGArena
-        </p>
-        <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {[1, 2, 3, 4].map((item) => (
-            <div
-              key={item}
-              className="h-[70px] sm:h-[80px] rounded-xl border border-dashed border-white/20 bg-black/20 flex items-center justify-center text-[11px] sm:text-[12px] text-white/50"
-            >
-              Logo Placeholder
-            </div>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
