@@ -9,7 +9,7 @@ import User from "./database/models/user.js";
 const server = createServer(app);
 export const io = new Server(server, {
   cors: {
-    origin: env.origins[0],
+    origin: env.origins[1],
     methods: ["GET", "POST"],
     credentials: true,
   },
