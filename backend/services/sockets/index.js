@@ -9,7 +9,9 @@ export const onConnect = async (socket) => {
   const token = socket.handshake.auth.token;
   const decoded = jwt.verify(token, env.jwt_secret);
   const user = await User.findById(decoded.id);
-  if (!user) throw new Error("Internal server error");
+  if (!user) {
+    console.log("No user found with token", token);
+  }
   socket.on("join-room", (data) => {
     socket.join(data.room);
   });
