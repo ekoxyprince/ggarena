@@ -27,7 +27,6 @@ function Signup() {
       });
     }
   }
-
   return (
     <div>
       {/* Header Background */}
@@ -137,19 +136,19 @@ function Signup() {
           </button>
 
           {/* Divider */}
-          <p className="my-[15px] sm:my-[20px] text-center text-[14px] sm:text-[15px] text-white/80">
+          {/* <p className="my-[15px] sm:my-[20px] text-center text-[14px] sm:text-[15px] text-white/80">
             Or
-          </p>
+          </p> */}
 
           {/* Social Login Buttons */}
-          <div className="flex flex-col sm:flex-row gap-[12px] sm:gap-[20px] items-center sm:items-start">
+          {/* <div className="flex flex-col sm:flex-row gap-[12px] sm:gap-[20px] items-center sm:items-start">
             <IconBtn text="Continue with Google" className="w-full sm:w-auto">
               <FaGoogle />
             </IconBtn>
             <IconBtn text="Continue with Facebook" className="w-full sm:w-auto">
               <FaFacebookSquare />
             </IconBtn>
-          </div>
+          </div> */}
 
           {/* Footer */}
           <p className="font-syne text-[15px] sm:text-[16px] text-center mt-[25px] sm:mt-[30px] text-white/80">

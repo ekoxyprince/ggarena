@@ -8,6 +8,7 @@ router.get("/dashboard", controller.getDashboardStats);
 
 // GET /api/admin/users - list all non-admin users
 router.get("/users", controller.getUsers);
+router.get("/users/all", controller.getAllUsers);
 
 // Communities management
 router.get("/communities", controller.getCommunities);

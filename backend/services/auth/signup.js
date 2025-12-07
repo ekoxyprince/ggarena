@@ -13,7 +13,16 @@ export default async (body) => {
     newUser.fullname,
     newUser.email,
     "Account Created",
-    "Welcome to GGArena. Your no1 Tournament platform for hosting and engaging in various gaming tournaments"
+    `<h5>Welcome to GG Arena.</h5>
+<p>You’re now part of a global gaming community built for players, clubs, creators, and esports organisers.<p/>
+
+<p>Our platform gives you a space to create communities, host tournaments, chat live, track your progress, and grow your gaming identity across all continents.<p/>
+
+<p>We’re more than a tournament platform.<p>
+<p>We’re building the ecosystem that connects gamers to opportunities, rewards, and real competition.<p/>
+
+Glad to have you with us.
+    `
   );
   await defaultMailoption(
     undefined,

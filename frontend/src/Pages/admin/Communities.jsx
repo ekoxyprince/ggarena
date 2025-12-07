@@ -27,7 +27,11 @@ function Communities() {
       search
     )}`,
   });
-
+    const { data: responseUsers,isFetched } = useFetch({
+      key: `admin-users-all`,
+      url: `/api/admin/users/all`,
+    });
+  
   const communities = response?.items || [];
   const pagination = response?.pagination;
   const [updatingId, setUpdatingId] = React.useState(null);
@@ -152,26 +156,11 @@ function Communities() {
   };
 
   React.useEffect(() => {
-    // Load users for owner selection when creating communities
-    (async () => {
-      try {
-        const resp = await fetch(
-          `/api/admin/users?page=1&limit=1000&search=`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
-            },
-          }
-        );
-        const json = await resp.json();
-        if (json?.success && json?.data?.items) {
-          setUsers(json.data.items);
-        }
-      } catch (e) {
-        // ignore; owner select will just be empty
-      }
-    })();
-  }, []);
+    if(isFetched){
+      setUsers(responseUsers)
+      console.log("Users",responseUsers)
+    }
+  }, [responseUsers]);
 
   return (
     <div className="flex flex-col space-y-4">

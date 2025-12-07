@@ -107,7 +107,14 @@ export const getUsers = catchAsync(async (req, res) => {
     data: buildPaginatedData(users, total, page, limit),
   });
 });
-
+export const getAllUsers = catchAsync(async (req, res) => {
+  const users = await User.find({ role: "user" });
+  res.status(200).json({
+    success: true,
+    message: "Users retrieved",
+    data: users,
+  });
+});
 // Communities with participants & creator (paginated + search)
 export const getCommunities = catchAsync(async (req, res) => {
   const { page, limit, skip } = getPaginationParams(req);
@@ -215,7 +222,15 @@ export const createCommunityAdmin = catchAsync(async (req, res) => {
     ownerId,
   } = req.body;
 
-  if (!name || !image || !cover || !officialEmail || !discordChannel || !description || !ownerId) {
+  if (
+    !name ||
+    !image ||
+    !cover ||
+    !officialEmail ||
+    !discordChannel ||
+    !description ||
+    !ownerId
+  ) {
     return res.status(400).json({
       success: false,
       message:
@@ -279,39 +294,37 @@ export const getCommunityAdmin = catchAsync(async (req, res) => {
 });
 
 // Admin: remove a participant from a community
-export const deleteCommunityParticipantAdmin = catchAsync(
-  async (req, res) => {
-    const { id, userId } = req.params;
+export const deleteCommunityParticipantAdmin = catchAsync(async (req, res) => {
+  const { id, userId } = req.params;
 
-    const community = await Community.findById(id).populate("participants.user");
+  const community = await Community.findById(id).populate("participants.user");
 
-    if (!community) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Community not found" });
-    }
+  if (!community) {
+    return res
+      .status(404)
+      .json({ success: false, message: "Community not found" });
+  }
 
-    const before = community.participants.length;
-    community.participants = community.participants.filter(
-      (p) => p.user.toString() !== userId.toString()
-    );
+  const before = community.participants.length;
+  community.participants = community.participants.filter(
+    (p) => p.user.toString() !== userId.toString()
+  );
 
-    if (community.participants.length === before) {
-      return res.status(404).json({
-        success: false,
-        message: "Participant not found in community",
-      });
-    }
-
-    await community.save();
-
-    res.status(200).json({
-      success: true,
-      message: "Participant removed",
-      data: community,
+  if (community.participants.length === before) {
+    return res.status(404).json({
+      success: false,
+      message: "Participant not found in community",
     });
   }
-);
+
+  await community.save();
+
+  res.status(200).json({
+    success: true,
+    message: "Participant removed",
+    data: community,
+  });
+});
 
 // Admin: update community details
 export const updateCommunityAdmin = catchAsync(async (req, res) => {
@@ -465,7 +478,6 @@ export const updateTournamentAdmin = catchAsync(async (req, res) => {
   });
 
   if (!tournament) {
-    
     return res
       .status(404)
       .json({ success: false, message: "Tournament not found" });
@@ -498,41 +510,39 @@ export const deleteTournamentAdmin = catchAsync(async (req, res) => {
 });
 
 // Admin: remove participant from tournament
-export const deleteTournamentParticipantAdmin = catchAsync(
-  async (req, res) => {
-    const { id, userId } = req.params;
+export const deleteTournamentParticipantAdmin = catchAsync(async (req, res) => {
+  const { id, userId } = req.params;
 
-    const tournament = await Tournament.findById(id).populate(
-      "participants.user"
-    );
+  const tournament = await Tournament.findById(id).populate(
+    "participants.user"
+  );
 
-    if (!tournament) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Tournament not found" });
-    }
+  if (!tournament) {
+    return res
+      .status(404)
+      .json({ success: false, message: "Tournament not found" });
+  }
 
-    const before = tournament.participants.length;
-    tournament.participants = tournament.participants.filter(
-      (p) => p.user.toString() !== userId.toString()
-    );
+  const before = tournament.participants.length;
+  tournament.participants = tournament.participants.filter(
+    (p) => p.user.toString() !== userId.toString()
+  );
 
-    if (tournament.participants.length === before) {
-      return res.status(404).json({
-        success: false,
-        message: "Participant not found in tournament",
-      });
-    }
-
-    await tournament.save();
-
-    res.status(200).json({
-      success: true,
-      message: "Participant removed",
-      data: tournament,
+  if (tournament.participants.length === before) {
+    return res.status(404).json({
+      success: false,
+      message: "Participant not found in tournament",
     });
   }
-);
+
+  await tournament.save();
+
+  res.status(200).json({
+    success: true,
+    message: "Participant removed",
+    data: tournament,
+  });
+});
 
 // Orders + related payment/community/product (paginated + basic search by status)
 export const getOrders = catchAsync(async (req, res) => {

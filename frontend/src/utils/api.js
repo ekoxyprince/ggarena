@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const req = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://ggarena.gg",
 });
 req.interceptors.request.use(
   (config) => {

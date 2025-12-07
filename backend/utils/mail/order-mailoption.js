@@ -7,7 +7,7 @@ export default function MailOptions(
   message
 ) {
   let mailOption = {
-    from: '"GGArena" <support@ggarena.gg>',
+    from: '"GG Arena" <support@ggarena.gg>',
     to: `${email}`,
     subject: `${subject}`,
     text: "New message",
@@ -16,7 +16,7 @@ export default function MailOptions(
 
     <!-- Header -->
     <div style="text-align:center; padding:25px 10px; background:#111; color:#E1B530;">
-        <h1 style="margin:0; font-size:26px;">GGArena</h1>
+        <h1 style="margin:0; font-size:26px;">GG Arena</h1>
         <p style="margin:5px 0 0; font-size:15px; color:#fff;">Order Confirmation</p>
     </div>
 
@@ -60,7 +60,7 @@ export default function MailOptions(
             <p style="margin-top:25px; line-height:1.6;">
                 Best Regards,<br>
                 <strong>Management</strong><br>
-                GGArena
+                GG Arena
             </p>
 
             <div style="text-align:center; margin-top:30px;">
@@ -81,7 +81,7 @@ export default function MailOptions(
 
         <!-- Copyright -->
         <div style="text-align:center; font-size:13px; color:#666; padding:10px 0;">
-            © 2024 GGArena. All rights reserved.
+            © 2025 GG Arena. All rights reserved.
         </div>
 
     </div>

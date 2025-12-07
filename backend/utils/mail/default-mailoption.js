@@ -16,7 +16,7 @@ export default function MailOptions(
 
     <!-- Header / Logo -->
     <div style="text-align:center; padding:25px 10px;">
-        <h1 style="margin:0; color:#E1B530; font-size:28px; font-weight:700;">GGArena</h1>
+        <h1 style="margin:0; color:#E1B530; font-size:28px; font-weight:700;">GG Arena</h1>
     </div>
 
     <!-- Email Container -->
@@ -35,7 +35,7 @@ export default function MailOptions(
                 ${subject}
             </h2>
 
-            <p style="margin-top:0;">From GGArena,</p>
+            <p style="margin-top:0;">From GG Arena,</p>
 
             <p>Hello, <strong>${name}</strong></p>
 
@@ -46,7 +46,7 @@ export default function MailOptions(
             <p style="margin-top:25px; line-height:1.6;">
                 Best Regards,<br>
                 <strong>Management</strong><br>
-                GGArena
+                GG Arena
             </p>
 
             <div style="text-align:center; margin-top:30px;">
@@ -70,7 +70,7 @@ export default function MailOptions(
 
         <!-- Copyright Footer -->
         <div style="text-align:center; font-size:13px; color:#555; padding:10px 0;">
-            © 2024 GGArena. All rights reserved.
+            © 2025 GG Arena. All rights reserved.
         </div>
 
     </div>
