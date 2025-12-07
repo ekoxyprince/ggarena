@@ -181,7 +181,28 @@ export const getTournaments = catchAsync(async (req, res) => {
   });
 });
 
-// Admin: create community (admin becomes community admin)
+// Admin: get single tournament with participants
+export const getTournamentAdmin = catchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  const tournament = await Tournament.findById(id)
+    .populate("participants.user")
+    .populate("hostedBy");
+
+  if (!tournament) {
+    return res
+      .status(404)
+      .json({ success: false, message: "Tournament not found" });
+  }
+
+  res.status(200).json({
+    success: true,
+    message: "Tournament retrieved",
+    data: tournament,
+  });
+});
+
+// Admin: create community (admin selects owning user)
 export const createCommunityAdmin = catchAsync(async (req, res) => {
   const {
     name,
@@ -191,17 +212,23 @@ export const createCommunityAdmin = catchAsync(async (req, res) => {
     discordChannel,
     description,
     maxUsers,
+    ownerId,
   } = req.body;
 
-  if (!name || !image || !cover || !officialEmail || !discordChannel || !description) {
+  if (!name || !image || !cover || !officialEmail || !discordChannel || !description || !ownerId) {
     return res.status(400).json({
       success: false,
       message:
-        "Missing required fields: name, image, cover, officialEmail, discordChannel, description",
+        "Missing required fields: name, image, cover, officialEmail, discordChannel, description, ownerId",
     });
   }
 
-  const user = await User.findById(req.user._id);
+  const owner = await User.findById(ownerId);
+  if (!owner) {
+    return res
+      .status(404)
+      .json({ success: false, message: "Owner user not found" });
+  }
 
   const community = await Community.create({
     name,
@@ -213,15 +240,15 @@ export const createCommunityAdmin = catchAsync(async (req, res) => {
     maxUsers: maxUsers || 100,
     participants: [
       {
-        user: user._id,
+        user: owner._id,
         isAdmin: true,
       },
     ],
-    createdBy: user._id,
+    createdBy: owner._id,
   });
 
-  user.communitiesCreated += 1;
-  await user.save();
+  owner.communitiesCreated += 1;
+  await owner.save();
 
   res.status(201).json({
     success: true,
@@ -229,6 +256,62 @@ export const createCommunityAdmin = catchAsync(async (req, res) => {
     data: community,
   });
 });
+
+// Admin: get single community with members
+export const getCommunityAdmin = catchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  const community = await Community.findById(id)
+    .populate("participants.user")
+    .populate("createdBy");
+
+  if (!community) {
+    return res
+      .status(404)
+      .json({ success: false, message: "Community not found" });
+  }
+
+  res.status(200).json({
+    success: true,
+    message: "Community retrieved",
+    data: community,
+  });
+});
+
+// Admin: remove a participant from a community
+export const deleteCommunityParticipantAdmin = catchAsync(
+  async (req, res) => {
+    const { id, userId } = req.params;
+
+    const community = await Community.findById(id).populate("participants.user");
+
+    if (!community) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Community not found" });
+    }
+
+    const before = community.participants.length;
+    community.participants = community.participants.filter(
+      (p) => p.user.toString() !== userId.toString()
+    );
+
+    if (community.participants.length === before) {
+      return res.status(404).json({
+        success: false,
+        message: "Participant not found in community",
+      });
+    }
+
+    await community.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Participant removed",
+      data: community,
+    });
+  }
+);
 
 // Admin: update community details
 export const updateCommunityAdmin = catchAsync(async (req, res) => {
@@ -263,6 +346,25 @@ export const updateCommunityAdmin = catchAsync(async (req, res) => {
   res.status(200).json({
     success: true,
     message: "Community updated",
+    data: community,
+  });
+});
+
+// Admin: delete community
+export const deleteCommunityAdmin = catchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  const community = await Community.findByIdAndDelete(id);
+
+  if (!community) {
+    return res
+      .status(404)
+      .json({ success: false, message: "Community not found" });
+  }
+
+  res.status(200).json({
+    success: true,
+    message: "Community deleted",
     data: community,
   });
 });
@@ -363,6 +465,7 @@ export const updateTournamentAdmin = catchAsync(async (req, res) => {
   });
 
   if (!tournament) {
+    
     return res
       .status(404)
       .json({ success: false, message: "Tournament not found" });
@@ -374,6 +477,62 @@ export const updateTournamentAdmin = catchAsync(async (req, res) => {
     data: tournament,
   });
 });
+
+// Admin: delete tournament
+export const deleteTournamentAdmin = catchAsync(async (req, res) => {
+  const { id } = req.params;
+
+  const tournament = await Tournament.findByIdAndDelete(id);
+
+  if (!tournament) {
+    return res
+      .status(404)
+      .json({ success: false, message: "Tournament not found" });
+  }
+
+  res.status(200).json({
+    success: true,
+    message: "Tournament deleted",
+    data: tournament,
+  });
+});
+
+// Admin: remove participant from tournament
+export const deleteTournamentParticipantAdmin = catchAsync(
+  async (req, res) => {
+    const { id, userId } = req.params;
+
+    const tournament = await Tournament.findById(id).populate(
+      "participants.user"
+    );
+
+    if (!tournament) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Tournament not found" });
+    }
+
+    const before = tournament.participants.length;
+    tournament.participants = tournament.participants.filter(
+      (p) => p.user.toString() !== userId.toString()
+    );
+
+    if (tournament.participants.length === before) {
+      return res.status(404).json({
+        success: false,
+        message: "Participant not found in tournament",
+      });
+    }
+
+    await tournament.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Participant removed",
+      data: tournament,
+    });
+  }
+);
 
 // Orders + related payment/community/product (paginated + basic search by status)
 export const getOrders = catchAsync(async (req, res) => {

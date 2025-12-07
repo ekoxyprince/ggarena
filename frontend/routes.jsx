@@ -18,7 +18,10 @@ import Platforms from "./src/Pages/admin/Platforms";
 import Games from "./src/Pages/admin/Games";
 import Users from "./src/Pages/admin/Users";
 import AdminCommunities from "./src/Pages/admin/Communities";
+import CommunityMembers from "./src/Pages/admin/CommunityMembers";
 import AdminTournaments from "./src/Pages/admin/Tournaments";
+import TournamentMembers from "./src/Pages/admin/TournamentMembers";
+import TournamentMatches from "./src/Pages/admin/TournamentMatches";
 import Products from "./src/Pages/admin/Products";
 import Orders from "./src/Pages/admin/Orders";
 import OrderDetails from "./src/Pages/admin/OrderDetails";
@@ -138,8 +141,20 @@ const router = createBrowserRouter([
         element: <AdminCommunities />,
       },
       {
+        path: "/admin/communities/:id/members",
+        element: <CommunityMembers />,
+      },
+      {
         path: "/admin/tournaments",
         element: <AdminTournaments />,
+      },
+      {
+        path: "/admin/tournaments/:id/members",
+        element: <TournamentMembers />,
+      },
+      {
+        path: "/admin/tournaments/:id/matches",
+        element: <TournamentMatches />,
       },
       {
         path: "/admin/products",
