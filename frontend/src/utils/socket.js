@@ -1,11 +1,9 @@
 import { io } from "socket.io-client";
 
-const socket = io("https://72.62.52.249", {
+const socket = io("https://ggarena.gg", {
   autoConnect: false,
-  auth: {
-    token: null,
-  },
-  transports: ["websocket"],
+  auth: { token: null },
+  transports: ["websocket", "polling"],
 });
 
 export default socket;

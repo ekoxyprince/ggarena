@@ -13,7 +13,6 @@ export default {
     process.env.LOCAL_DOMAIN,
     process.env.REMOTE_DOMAIN,
     process.env.TEST_DOMAIN,
-    "http://72.62.52.249:3000",
   ],
   paystack_key: process.env.PAYSTACK_KEY,
 };

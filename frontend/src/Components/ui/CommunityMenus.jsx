@@ -67,9 +67,9 @@ function CommunityMenus({ hideTop, setHideTop }) {
         <Tab key="Chat Room" title="Chat Room">
           <CommunityChat />
         </Tab>
-        {/* <Tab key="Marketplace" title="Marketplace" >
+        <Tab key="Marketplace" title="Marketplace">
           <Marketplace />
-        </Tab> */}
+        </Tab>
         <Tab key="About" title="About">
           <CommunityAbout />
         </Tab>
