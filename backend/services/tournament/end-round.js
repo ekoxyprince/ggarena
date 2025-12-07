@@ -5,6 +5,8 @@ import {
   BadrequestError,
 } from "../../http/exceptions/error.js";
 import MatchHelper from "../../utils/match-helper.js";
+import User from "../../database/models/user.js";
+import MailOptions from "../../utils/mail/default-mailoption.js";
 const helper = new MatchHelper();
 
 export default async function (tournamentId, userId, round) {
@@ -12,7 +14,7 @@ export default async function (tournamentId, userId, round) {
     const tournament = await Tournament.findById(tournamentId)
       .populate("game", "name")
       .populate("hostedBy", "name image participants createdBy")
-      .populate("participants.user", "fullname profilePic");
+      .populate("participants.user", "_id fullname profilePic");
     if (!tournament) {
       throw new BadrequestError("No tournament found");
     }
@@ -42,9 +44,20 @@ export default async function (tournamentId, userId, round) {
     }
     const noOfParticipants = tournament.participants.filter(
       (p) => p.isEliminated == false
-    ).length;
-    if (noOfParticipants < 2) {
+    );
+    if (noOfParticipants.length < 2) {
       tournament.status = "ended";
+      const userWon = await User.findById(noOfParticipants[0].user._id);
+      if (!userWon) throw new Error("No user found!");
+      userWon.tournamentsWon += 1;
+      userWon.points += 20;
+      await userWon.save();
+      MailOptions(
+        userWon.fullname,
+        userWon.email,
+        "Tournament Won",
+        `You won the ${tournament.fullname} tournament`
+      );
     } else {
       let groupedPlayers = helper.groupPlayers(
         tournament.participants.filter((p) => p.isEliminated == false)

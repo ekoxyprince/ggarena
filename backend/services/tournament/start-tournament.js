@@ -5,6 +5,7 @@ import {
   BadrequestError,
 } from "../../http/exceptions/error.js";
 import MatchHelper from "../../utils/match-helper.js";
+import MailOptions from "../../utils/mail/default-mailoption.js";
 const helper = new MatchHelper();
 
 export default async function (tournamentId, userId) {
@@ -12,7 +13,7 @@ export default async function (tournamentId, userId) {
     const tournament = await Tournament.findById(tournamentId)
       .populate("game", "name")
       .populate("hostedBy", "name image participants createdBy")
-      .populate("participants.user", "fullname profilePic");
+      .populate("participants.user", "fullname email profilePic");
     if (!tournament) {
       throw new BadrequestError("No tournament found");
     }
@@ -43,6 +44,14 @@ export default async function (tournamentId, userId) {
     tournament.currentRound = 0;
     await Match.insertMany(arrangedPlayers);
     await tournament.save();
+    for (let i = 0; i < tournament.participants.length; i++) {
+      MailOptions(
+        tournament.participants[i].user.fullname,
+        tournament.participants[i].user.email,
+        `Tournament started`,
+        `This is to notify you that the ${tournament.name} tournament has started.`
+      );
+    }
   } catch (error) {
     throw error;
   }

@@ -1,6 +1,7 @@
 import Tournament from "../../database/models/tournament.js";
 import User from "../../database/models/user.js";
 import { BadrequestError } from "../../http/exceptions/error.js";
+import MailOptions from "../../utils/mail/default-mailoption.js";
 
 export default async function (tournamentId, userId) {
   const tournament = await Tournament.findById(tournamentId);
@@ -32,6 +33,12 @@ export default async function (tournamentId, userId) {
       points: 0,
       isEliminated: false,
     });
+    MailOptions(
+      user.fullname,
+      user.email,
+      `Joined ${tournament.name} Tournament`,
+      `You have successfully Joined the ${tournament.name} tournament`
+    );
   }
   await tournament.save();
   await user.save();

@@ -69,6 +69,5 @@ export default async function (tournamentId) {
       },
     },
   ]);
-  console.log(matches);
   return matches;
 }

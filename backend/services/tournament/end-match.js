@@ -6,6 +6,7 @@ import {
   BadrequestError,
 } from "../../http/exceptions/error.js";
 import MatchHelper from "../../utils/match-helper.js";
+import MailOptions from "../../utils/mail/default-mailoption.js";
 const helper = new MatchHelper();
 
 export default async function (tournamentId, matchId, userId) {
@@ -39,13 +40,23 @@ export default async function (tournamentId, matchId, userId) {
       );
       if (index1 < 0 || index2 < 0)
         throw new BadrequestError("no participant found");
-      userWon.tournamentsWon += 1;
       tournament.participants[index1].points += 20;
       tournament.participants[index1].wins += 1;
       tournament.participants[index2].isEliminated = true;
       tournament.participants[index2].losses += 1;
       match.status = "ended";
-      await userWon.save();
+      MailOptions(
+        userWon.fullname,
+        userWon.email,
+        "Match Won",
+        `You have won the Match against ${userLost.fullname} on the ${tournament.name} tournament`
+      );
+      MailOptions(
+        userLost.fullname,
+        userLost.email,
+        "Match Lost",
+        `You have lost the Match against ${userWon.fullname} on the ${tournament.name} tournament`
+      );
     }
     await match.save();
     await tournament.save();
