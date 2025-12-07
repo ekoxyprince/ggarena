@@ -87,7 +87,7 @@ function CommunityAbout() {
   rgba(38,38,38,0) 0%,
   rgba(38,38,38,0.2) 35%,
   rgba(38,38,38,1) 100%
-), url(${BannerMM})`,
+), url(${data?.cover})`,
             }}
           >
             <div className="overlay w-full h-full absolute left-0 top-0 bg-[#262626]/45"></div>

@@ -11,20 +11,20 @@ import CommunityChat from "../../Pages/Dashboard/CommunityChat";
 import CommunityAbout from "../../Pages/dashboard/CommunityAbout";
 import CommunityTournament from "./CommunityTournament";
 import Marketplace from "../../Pages/dashboard/Marketplace";
-function CommunityMenus({hideTop, setHideTop}) {
+function CommunityMenus({ hideTop, setHideTop }) {
   const handleTabClick = (key) => {
     if (
-      (key === "Tournaments" ||
-        key === "Chat Room" ||
-        key === "About" ||
-        key === "Settings" ||
-      key === "Marketplace")
+      key === "Tournaments" ||
+      key === "Chat Room" ||
+      key === "About" ||
+      key === "Settings" ||
+      key === "Marketplace"
     ) {
       setHideTop(true);
     } else {
       setHideTop(false);
     }
-  }
+  };
   const items = [
     {
       key: "1",
@@ -61,24 +61,21 @@ function CommunityMenus({hideTop, setHideTop}) {
         <Tab key="Home" title="Home">
           <CommunityHome />
         </Tab>
-        <Tab
-          key="Tournaments"
-          title="Tournaments"
-        >
-         <CommunityTournament />
+        <Tab key="Tournaments" title="Tournaments">
+          <CommunityTournament />
         </Tab>
-        <Tab key="Chat Room" title="Chat Room" >
+        <Tab key="Chat Room" title="Chat Room">
           <CommunityChat />
         </Tab>
-        <Tab key="Marketplace" title="Marketplace" >
+        {/* <Tab key="Marketplace" title="Marketplace" >
           <Marketplace />
-        </Tab>
+        </Tab> */}
         <Tab key="About" title="About">
           <CommunityAbout />
         </Tab>
-        <Tab key="Settings" title="Settings">
+        {/* <Tab key="Settings" title="Settings">
           <p className="text-gray-500">No photos available</p>
-        </Tab>
+        </Tab> */}
       </Tabs>
     </div>
   );

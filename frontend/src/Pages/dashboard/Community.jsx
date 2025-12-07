@@ -95,7 +95,7 @@ function Community() {
           <div className="flex items-center gap-4 w-full">
             <div className="w-[70px] h-[70px] rounded-full overflow-hidden">
               <img
-                src={data?.cover}
+                src={data?.image}
                 className="w-full h-full object-cover"
                 alt=""
               />
