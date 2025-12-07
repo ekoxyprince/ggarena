@@ -18,14 +18,16 @@ import comm from "./Images/com.png";
 import turna from "./Images/turna.png";
 import gameOver from "./Images/game_over.png";
 import sword from "./Images/Sword_icon.png";
-import partner1 from "./Images/Partners/partner1.svg";
-import partner2 from "./Images/Partners/partner2.svg";
-import partner3 from "./Images/Partners/partner3.svg";
-import partner4 from "./Images/Partners/partner4.svg";
-import partner5 from "./Images/Partners/partner5.svg";
-import partner6 from "./Images/Partners/partner6.svg";
-import partner7 from "./Images/Partners/partner7.svg";
-import partner8 from "./Images/Partners/partner8.svg";
+import partner1 from "./Images/Partners/1.png";
+import partner2 from "./Images/Partners/2.png";
+import partner3 from "./Images/Partners/3.png";
+import partner4 from "./Images/Partners/4.png";
+import partner5 from "./Images/Partners/5.png";
+import partner6 from "./Images/Partners/6.png";
+import partner7 from "./Images/Partners/7.webp";
+import partner8 from "./Images/Partners/8.png";
+import partner9 from "./Images/Partners/9.png";
+import partner10 from "./Images/Partners/10.png";
 import BGvideo from "./Images/marketplace.mp4";
 import yellowBorder from "./Images/YellowBorder.svg";
 import whiteBorder from "./Images/WhiteBorder.svg";
@@ -110,6 +112,8 @@ export const Images = {
   partner6,
   partner7,
   partner8,
+  partner9,
+  partner10,
   User,
   tor,
   about,

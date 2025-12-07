@@ -7,10 +7,13 @@ import { FaGoogle, FaFacebookSquare } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import useMutate from "../hooks/useMutate";
 import toast from "react-hot-toast";
+import { FaRegEye } from "react-icons/fa6";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 function Signup() {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm({});
+  const [isVisible, setIsVisible] = React.useState(false);
   const { mutateAsync } = useMutate("/api/auth/signup", ["signup"], "post");
 
   async function onSubmit(data) {
@@ -99,12 +102,20 @@ function Signup() {
               className="w-full bg-[#292929] border-t-[2px] border-b-[2px] border-[#474747] h-[42px] sm:h-[45px] outline-0 px-[15px] sm:px-[20px] font-syne text-[14px] sm:text-[15px]"
               {...register("email", { required: true })}
             />
-            <input
-              type="password"
-              placeholder="Password"
-              className="w-full bg-[#292929] border-t-[2px] border-b-[2px] border-[#474747] h-[42px] sm:h-[45px] outline-0 px-[15px] sm:px-[20px] font-syne text-[14px] sm:text-[15px]"
-              {...register("password", { required: true })}
-            />
+            <div className="relative">
+              <input
+                type={isVisible ? "text" : "password"}
+                placeholder="Password"
+                className="w-full bg-[#292929] border-t-[2px] border-b-[2px] border-[#474747] h-[42px] sm:h-[45px] outline-0 px-[15px] sm:px-[20px] font-syne text-[14px] sm:text-[15px]"
+                {...register("password", { required: true })}
+              />
+              <div
+                onClick={() => setIsVisible((prev) => !prev)}
+                className="absolute top-[50%] translate-y-[-50%] right-2"
+              >
+                {isVisible ? <FaRegEyeSlash /> : <FaRegEye />}
+              </div>
+            </div>
           </div>
 
           {/* Submit Button */}

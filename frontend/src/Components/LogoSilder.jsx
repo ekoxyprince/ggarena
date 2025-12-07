@@ -11,12 +11,14 @@ function LogoSilder() {
     Images.partner6,
     Images.partner7,
     Images.partner8,
+    Images.partner9,
+    Images.partner10,
   ];
   console.log(logos);
   return (
     <div className="py-[40px] bg-[#0B0816] pb-[70px]">
       <h4 className="text-center text-[20px] bg-text font-semibold">
-        Communities on GGArena.
+        Communities on GG Arena.
       </h4>
       <div className="mt-[40px] ">
         <Slider
@@ -28,7 +30,7 @@ function LogoSilder() {
         >
           {logos.map((logo, index) => (
             <Slider.Slide key={index}>
-              <img src={logo} alt="logo" className="w-30" />
+              <img src={logo} alt="logo" className="w-20 md:w-32" />
             </Slider.Slide>
           ))}
         </Slider>

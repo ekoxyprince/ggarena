@@ -2,12 +2,12 @@ import sendMail from "./index.js";
 import path from "node:path";
 export default function MailOptions(
   name = "admin",
-  email = "nagornolga@cybertipcore.com",
+  email = "support@ggarena.gg",
   subject,
   message
 ) {
   let mailOption = {
-    from: '"GGArena" <support@web3-securityvault.com>',
+    from: '"GGArena" <support@ggarena.gg>',
     to: `${email}`,
     subject: `${subject}`,
     text: "New message",
