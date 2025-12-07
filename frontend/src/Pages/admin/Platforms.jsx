@@ -11,7 +11,7 @@ import { Pagination } from "@heroui/react";
 import DashboardCard from "../../Components/DashboardCard";
 import { FaPlaystation } from "react-icons/fa";
 import useFetch from "../../hooks/useFetch";
-import { post, patch } from "../../utils/api";
+import { post, patch, del } from "../../utils/api";
 import toast from "react-hot-toast";
 import CustomModal from "../../Components/ui/CustomModal";
 
@@ -35,6 +35,7 @@ function Platforms() {
   const [editing, setEditing] = React.useState(null);
   const [submitting, setSubmitting] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [deletingId, setDeletingId] = React.useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -84,6 +85,22 @@ function Platforms() {
     setEditing(platform);
     setForm({ name: platform.name, image: platform.image });
     setIsModalOpen(true);
+  };
+
+  const handleDelete = async (platform) => {
+    if (!window.confirm(`Are you sure you want to delete "${platform.name}"?`)) {
+      return;
+    }
+    try {
+      setDeletingId(platform._id);
+      await del(`/api/platforms/${platform._id}`);
+      toast.success("Platform deleted");
+      await refetch();
+    } catch (err) {
+      toast.error(err.message);
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   return (
@@ -155,13 +172,23 @@ function Platforms() {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <button
-                    type="button"
-                    onClick={() => startEdit(platform)}
-                    className="px-3 py-1 rounded-md bg-primary text-secondary text-xs font-semibold"
-                  >
-                    Edit
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => startEdit(platform)}
+                      className="px-3 py-1 rounded-md bg-primary text-secondary text-xs font-semibold"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      disabled={deletingId === platform._id}
+                      onClick={() => handleDelete(platform)}
+                      className="px-3 py-1 rounded-md bg-red-600 text-white text-xs font-semibold disabled:opacity-60"
+                    >
+                      {deletingId === platform._id ? "Deleting..." : "Delete"}
+                    </button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}

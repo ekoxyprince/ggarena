@@ -9,15 +9,17 @@ import {
 } from "@heroui/react";
 import { Pagination } from "@heroui/react";
 import useFetch from "../../hooks/useFetch";
-import { patch, post } from "../../utils/api";
+import { patch, post, del } from "../../utils/api";
 import toast from "react-hot-toast";
 import { Images } from "../../assets/Images";
 import CustomModal from "../../Components/ui/CustomModal";
+import { useNavigate } from "react-router-dom";
 
 function Communities() {
   const [page, setPage] = React.useState(1);
   const [search, setSearch] = React.useState("");
   const rowsPerPage = 10;
+  const navigate = useNavigate();
 
   const { data: response, isLoading, refetch } = useFetch({
     key: `admin-communities-${page}-${search}`,
@@ -29,10 +31,12 @@ function Communities() {
   const communities = response?.items || [];
   const pagination = response?.pagination;
   const [updatingId, setUpdatingId] = React.useState(null);
+  const [deletingId, setDeletingId] = React.useState(null);
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [editing, setEditing] = React.useState(null);
   const [submitting, setSubmitting] = React.useState(false);
+  const [users, setUsers] = React.useState([]);
   const [form, setForm] = React.useState({
     name: "",
     image: "",
@@ -42,6 +46,7 @@ function Communities() {
     maxUsers: "",
     description: "",
     isVerified: false,
+    ownerId: "",
   });
 
   const resetForm = () => {
@@ -54,6 +59,7 @@ function Communities() {
       maxUsers: "",
       description: "",
       isVerified: false,
+      ownerId: "",
     });
     setEditing(null);
   };
@@ -74,6 +80,7 @@ function Communities() {
       maxUsers: community.maxUsers?.toString() || "",
       description: community.description || "",
       isVerified: community.isVerified || false,
+      ownerId: community.createdBy?._id || "",
     });
     setIsModalOpen(true);
   };
@@ -95,6 +102,8 @@ function Communities() {
         maxUsers: form.maxUsers ? Number(form.maxUsers) : undefined,
       };
       if (editing) {
+        // Do not change owner on edit for now; backend ignores ownerId on update
+        delete payload.ownerId;
         await patch(`/api/admin/communities/${editing._id}`, payload);
         toast.success("Community updated");
       } else {
@@ -125,6 +134,44 @@ function Communities() {
       setUpdatingId(null);
     }
   };
+
+  const handleDelete = async (community) => {
+    if (!(window.confirm(`Delete community "${community.name}"? This cannot be undone.`))) {
+      return;
+    }
+    try {
+      setDeletingId(community._id);
+      await del(`/api/admin/communities/${community._id}`);
+      toast.success("Community deleted");
+      await refetch();
+    } catch (err) {
+      toast.error(err.message);
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
+  React.useEffect(() => {
+    // Load users for owner selection when creating communities
+    (async () => {
+      try {
+        const resp = await fetch(
+          `/api/admin/users?page=1&limit=1000&search=`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+            },
+          }
+        );
+        const json = await resp.json();
+        if (json?.success && json?.data?.items) {
+          setUsers(json.data.items);
+        }
+      } catch (e) {
+        // ignore; owner select will just be empty
+      }
+    })();
+  }, []);
 
   return (
     <div className="flex flex-col space-y-4">
@@ -209,10 +256,25 @@ function Communities() {
                     </button>
                     <button
                       type="button"
+                      onClick={() => navigate(`/admin/communities/${c._id}/members`)}
+                      className="px-3 py-1 rounded-md bg-sky-600 text-white text-xs font-semibold"
+                    >
+                      View members
+                    </button>
+                    <button
+                      type="button"
                       onClick={() => openEditModal(c)}
                       className="px-3 py-1 rounded-md bg-slate-700 text-slate-100 text-xs font-semibold"
                     >
                       Edit
+                    </button>
+                    <button
+                      type="button"
+                      disabled={deletingId === c._id}
+                      onClick={() => handleDelete(c)}
+                      className="px-3 py-1 rounded-md bg-red-600 text-white text-xs font-semibold disabled:opacity-60"
+                    >
+                      {deletingId === c._id ? "Deleting..." : "Delete"}
                     </button>
                   </div>
                 </TableCell>
@@ -251,6 +313,23 @@ function Communities() {
             {editing ? "Edit community" : "Create new community"}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex flex-col gap-1">
+              <label className="text-xs text-slate-400">Owner (created by)</label>
+              <select
+                name="ownerId"
+                disabled={!!editing}
+                value={form.ownerId}
+                onChange={handleFormChange}
+                className="w-full px-3 py-2 rounded-md bg-[#27272f] border border-[#3f3f46] text-sm outline-none focus:border-primary"
+              >
+                <option value="">Select user as owner</option>
+                {users.map((u) => (
+                  <option key={u._id} value={u._id}>
+                    {u.fullname} ({u.email})
+                  </option>
+                ))}
+              </select>
+            </div>
             <div className="flex flex-col gap-1">
               <label className="text-xs text-slate-400">Name</label>
               <input

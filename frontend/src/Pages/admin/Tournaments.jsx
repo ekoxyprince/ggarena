@@ -11,13 +11,15 @@ import { Pagination } from "@heroui/react";
 import useFetch from "../../hooks/useFetch";
 import { Images } from "../../assets/Images";
 import CustomModal from "../../Components/ui/CustomModal";
-import { post, patch, get } from "../../utils/api";
+import { post, patch, get, del } from "../../utils/api";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 function Tournaments() {
   const [page, setPage] = React.useState(1);
   const [search, setSearch] = React.useState("");
   const rowsPerPage = 10;
+  const navigate = useNavigate();
 
   const { data: response, isLoading, refetch } = useFetch({
     key: `admin-tournaments-${page}-${search}`,
@@ -30,6 +32,7 @@ function Tournaments() {
   const pagination = response?.pagination;
 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [deletingId, setDeletingId] = React.useState(null);
   const [editing, setEditing] = React.useState(null);
   const [submitting, setSubmitting] = React.useState(false);
   const [form, setForm] = React.useState({
@@ -146,6 +149,26 @@ function Tournaments() {
     }
   };
 
+  const handleDelete = async (tournament) => {
+    if (
+      !window.confirm(
+        `Delete tournament "${tournament.name}"? This cannot be undone.`
+      )
+    ) {
+      return;
+    }
+    try {
+      setDeletingId(tournament._id);
+      await del(`/api/admin/tournaments/${tournament._id}`);
+      toast.success("Tournament deleted");
+      await refetch();
+    } catch (err) {
+      toast.error(err.message);
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   return (
     <div className="flex flex-col space-y-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -218,13 +241,37 @@ function Tournaments() {
                   {t.createdAt ? new Date(t.createdAt).toLocaleString() : "-"}
                 </TableCell>
                 <TableCell>
-                  <button
-                    type="button"
-                    onClick={() => openEditModal(t)}
-                    className="px-3 py-1 rounded-md bg-slate-700 text-slate-100 text-xs font-semibold"
-                  >
-                    Edit
-                  </button>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => navigate(`/admin/tournaments/${t._id}/members`)}
+                      className="px-3 py-1 rounded-md bg-sky-600 text-white text-xs font-semibold"
+                    >
+                      View members
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => navigate(`/admin/tournaments/${t._id}/matches`)}
+                      className="px-3 py-1 rounded-md bg-indigo-600 text-white text-xs font-semibold"
+                    >
+                      View matches
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openEditModal(t)}
+                      className="px-3 py-1 rounded-md bg-slate-700 text-slate-100 text-xs font-semibold"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      disabled={deletingId === t._id}
+                      onClick={() => handleDelete(t)}
+                      className="px-3 py-1 rounded-md bg-red-600 text-white text-xs font-semibold disabled:opacity-60"
+                    >
+                      {deletingId === t._id ? "Deleting..." : "Delete"}
+                    </button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}

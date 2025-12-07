@@ -3,6 +3,7 @@ import getProduct from "../services/products/get-product.js";
 import communityProducts from "../services/products/community-products.js";
 import updateProduct from "../services/products/update-product.js";
 import getProducts from "../services/products/get-products.js";
+import deleteProduct from "../services/products/delete-product.js";
 import catchAsync from "../utils/catchAsync.js";
 
 export const create = catchAsync(async (req, res) => {
@@ -34,4 +35,9 @@ export const get = catchAsync(async (req, res) => {
 export const update = catchAsync(async (req, res) => {
   await updateProduct(req.params.productId, req.body);
   res.status(200).json({ success: true, message: "Product updated" });
+});
+
+export const remove = catchAsync(async (req, res) => {
+  await deleteProduct(req.params.productId);
+  res.status(200).json({ success: true, message: "Product deleted" });
 });

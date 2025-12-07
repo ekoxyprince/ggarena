@@ -11,7 +11,7 @@ import { Pagination } from "@heroui/react";
 import DashboardCard from "../../Components/DashboardCard";
 import { IoGameController } from "react-icons/io5";
 import useFetch from "../../hooks/useFetch";
-import { post, patch } from "../../utils/api";
+import { post, patch, del } from "../../utils/api";
 import toast from "react-hot-toast";
 import CustomModal from "../../Components/ui/CustomModal";
 
@@ -35,6 +35,7 @@ function Games() {
   const [editing, setEditing] = React.useState(null);
   const [submitting, setSubmitting] = React.useState(false);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [deletingId, setDeletingId] = React.useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -84,6 +85,22 @@ function Games() {
     setEditing(game);
     setForm({ name: game.name, image: game.image });
     setIsModalOpen(true);
+  };
+
+  const handleDelete = async (game) => {
+    if (!window.confirm(`Are you sure you want to delete "${game.name}"?`)) {
+      return;
+    }
+    try {
+      setDeletingId(game._id);
+      await del(`/api/games/${game._id}`);
+      toast.success("Game deleted");
+      await refetch();
+    } catch (err) {
+      toast.error(err.message);
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   return (
@@ -155,13 +172,23 @@ function Games() {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <button
-                    type="button"
-                    onClick={() => startEdit(game)}
-                    className="px-3 py-1 rounded-md bg-primary text-secondary text-xs font-semibold"
-                  >
-                    Edit
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      onClick={() => startEdit(game)}
+                      className="px-3 py-1 rounded-md bg-primary text-secondary text-xs font-semibold"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      disabled={deletingId === game._id}
+                      onClick={() => handleDelete(game)}
+                      className="px-3 py-1 rounded-md bg-red-600 text-white text-xs font-semibold disabled:opacity-60"
+                    >
+                      {deletingId === game._id ? "Deleting..." : "Delete"}
+                    </button>
+                  </div>
                 </TableCell>
               </TableRow>
             ))}

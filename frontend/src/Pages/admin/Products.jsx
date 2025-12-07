@@ -9,9 +9,11 @@ import {
 } from "@heroui/react";
 import { Pagination } from "@heroui/react";
 import useFetch from "../../hooks/useFetch";
+import { del } from "../../utils/api";
+import toast from "react-hot-toast";
 
 const Products = () => {
-  const { data, isLoading } = useFetch({
+  const { data, isLoading, refetch } = useFetch({
     key: "admin-products",
     url: "/api/products",
   });
@@ -19,12 +21,33 @@ const Products = () => {
   const allProducts = data || [];
   const [page, setPage] = React.useState(1);
   const [search, setSearch] = React.useState("");
+  const [deletingId, setDeletingId] = React.useState(null);
   const rowsPerPage = 10;
   const filteredProducts = allProducts.filter((p) =>
     search ? p.name?.toLowerCase().includes(search.toLowerCase()) : true
   );
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / rowsPerPage));
   const products = filteredProducts.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+
+  const handleDelete = async (product) => {
+    if (
+      !window.confirm(
+        `Delete product "${product.name}"? This will not affect past orders but cannot be undone.`
+      )
+    ) {
+      return;
+    }
+    try {
+      setDeletingId(product._id);
+      await del(`/api/products/${product._id}`);
+      toast.success("Product deleted");
+      await refetch();
+    } catch (err) {
+      toast.error(err.message);
+    } finally {
+      setDeletingId(null);
+    }
+  };
 
   return (
     <div className="flex flex-col space-y-4">
@@ -44,16 +67,17 @@ const Products = () => {
           />
         </div>
         <Table aria-label="Products table">
-          <TableHeader>
-            <TableColumn>NAME</TableColumn>
-            <TableColumn>COMMUNITY</TableColumn>
-            <TableColumn>PRICE</TableColumn>
-            <TableColumn>CURRENCY</TableColumn>
-            <TableColumn>CATEGORY</TableColumn>
-            <TableColumn>BRAND</TableColumn>
-            <TableColumn>STOCK</TableColumn>
-            <TableColumn>ACTIVE</TableColumn>
-          </TableHeader>
+        <TableHeader>
+          <TableColumn>NAME</TableColumn>
+          <TableColumn>COMMUNITY</TableColumn>
+          <TableColumn>PRICE</TableColumn>
+          <TableColumn>CURRENCY</TableColumn>
+          <TableColumn>CATEGORY</TableColumn>
+          <TableColumn>BRAND</TableColumn>
+          <TableColumn>STOCK</TableColumn>
+          <TableColumn>ACTIVE</TableColumn>
+          <TableColumn>ACTION</TableColumn>
+        </TableHeader>
           <TableBody
             isLoading={isLoading}
             emptyContent={
@@ -70,6 +94,16 @@ const Products = () => {
                 <TableCell>{p.brand}</TableCell>
                 <TableCell>{p.stockCount}</TableCell>
                 <TableCell>{p.isActive ? "Yes" : "No"}</TableCell>
+                <TableCell>
+                  <button
+                    type="button"
+                    disabled={deletingId === p._id}
+                    onClick={() => handleDelete(p)}
+                    className="px-3 py-1 rounded-md bg-red-600 text-white text-xs font-semibold disabled:opacity-60"
+                  >
+                    {deletingId === p._id ? "Deleting..." : "Delete"}
+                  </button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
