@@ -7,7 +7,13 @@ import { onConnect } from "./services/sockets/index.js";
 import User from "./database/models/user.js";
 
 const server = createServer(app);
-export const io = new Server(server);
+export const io = new Server(server, {
+  cors: {
+    origin: env.origins[0],
+    methods: ["GET", "POST"],
+    credentials: true,
+  },
+});
 connectToDb().then(async () => {
   const admin = await User.findOne({ role: "admin" });
   if (!admin) {
@@ -26,5 +32,8 @@ connectToDb().then(async () => {
   io.on("connection", function (socket) {
     onConnect(socket);
     console.log("Connected to socket " + socket.id);
+  });
+  io.on("error", (error) => {
+    console.log("IO ERROR", error);
   });
 });
