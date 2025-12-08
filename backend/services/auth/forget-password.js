@@ -5,7 +5,7 @@ import defaultMailOptions from "../../utils/mail/default-mailoption.js";
 import env from "../../config/env.js";
 
 export default async (email) => {
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email: email.toLowerCase() });
   if (!user) {
     throw new BadrequestError("No user found!");
   }
@@ -19,7 +19,7 @@ export default async (email) => {
     user.fullname,
     user.email,
     "Password Reset",
-    `Click the link to reset Password <a href="https://${env.origins[1]}/reset-password/${resetToken}">Reset</a>`
+    `Click the link to reset Password <a href="${env.origins[1]}/reset-password/${resetToken}">Reset</a>`
   );
   return resetToken;
 };

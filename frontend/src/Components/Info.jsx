@@ -38,8 +38,8 @@ function Info() {
               Build Your Hub
             </h1>
             <p className="font-syne text-[14px] sm:text-[16px] text-white/90 leading-snug">
-              GG Arena is a platform where organizers build branded hubs with
-              roles, tournaments, payouts, and live chat. Players keep one
+              GG Arena Esports is a platform where organizers build branded hubs
+              with roles, tournaments, payouts, and live chat. Players keep one
               profile across every community, and creators plug in and get paid
               for reach.
             </p>

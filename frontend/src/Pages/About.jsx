@@ -23,7 +23,7 @@ function About() {
           Who We Are
         </h1>
         <p className="font-syne text-[15px] sm:text-[16px] text-white/85 leading-relaxed">
-          GG Arena is an international esports brand built to connect
+          GG Arena Esports is an international esports brand built to connect
           communities, creators, and competitors across all continents. We’re
           more than tournaments, we’re building a digital home for gaming
           communities.
@@ -42,8 +42,8 @@ function About() {
           </span>
         </p>
         <p className="font-syne text-[15px] sm:text-[16px] text-white/80 leading-relaxed">
-          GG Arena is where players compete, creators shine, communities grow,
-          and esports becomes a movement not just an event.
+          GG Arena ESPORTS is where players compete, creators shine, communities
+          grow, and esports becomes a movement not just an event.
         </p>
       </Section>
 
@@ -109,7 +109,7 @@ function About() {
               <li>Storylines, match recaps, and community engagement</li>
             </ul>
             <p className="font-syne text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
-              This league is now a core part of the GG Arena identity.
+              This league is now a core part of the GG Arena ESPORTS identity.
             </p>
           </div>
         </div>
@@ -171,8 +171,8 @@ function About() {
               <li>Social content around players, clubs, and events</li>
             </ul>
             <p className="font-syne text-[14px] sm:text-[15px] text-white/80 leading-relaxed">
-              Your creative output shows fans and sponsors that GG Arena doesn’t
-              just host matches — you create stories.
+              Your creative output shows fans and sponsors that GG Arena ESPORTS
+              doesn’t just host matches — you create stories.
             </p>
           </div>
         </div>
@@ -201,8 +201,8 @@ function About() {
           Connect With Us
         </h2>
         <p className="font-syne text-[14px] sm:text-[15px] text-white/80">
-          Stay plugged into everything GG Arena is building across tournaments,
-          creators, and community events.
+          Stay plugged into everything GG Arena ESPORTS is building across
+          tournaments, creators, and community events.
         </p>
         <div className="flex flex-wrap gap-3 mt-2">
           <a

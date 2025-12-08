@@ -5,7 +5,10 @@ import { BadrequestError } from "../../http/exceptions/error.js";
 import env from "../../config/env.js";
 
 export default async (email, password) => {
-  const user = await User.findOne({ email, authProvider: "basic" });
+  const user = await User.findOne({
+    email: email.toLowerCase(),
+    authProvider: "basic",
+  });
   if (!user) {
     throw new BadrequestError("Incorrect creditials");
   }

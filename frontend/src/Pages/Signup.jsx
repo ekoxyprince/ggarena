@@ -83,8 +83,8 @@ function Signup() {
           </h1>
           <p className="font-Mont text-[13px] sm:text-[14px] text-center mt-[15px] sm:mt-[19px] text-white/80 mb-[25px] sm:mb-[30px]">
             Create your account and join a community built for gamers, by
-            gamers. GG Arena gives you the tools to compete, connect, and grow.
-            It all starts here.
+            gamers. GG Arena Esports gives you the tools to compete, connect,
+            and grow. It all starts here.
           </p>
 
           {/* Input Fields */}

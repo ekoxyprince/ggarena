@@ -107,7 +107,7 @@ function ForgetPassword() {
               className="w-[30px] sm:w-[40px] rotate-90 absolute left-[-2px] top-[50%] translate-y-[-50%]"
               alt=""
             />
-            Forget Password
+            Reset Password
             <img
               src={Images.blackBorder2}
               className="w-[30px] sm:w-[40px] -rotate-90 absolute right-[-2px] top-[50%] translate-y-[-50%]"

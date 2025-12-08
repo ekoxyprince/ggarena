@@ -3,7 +3,7 @@ import { BadrequestError } from "../../http/exceptions/error.js";
 import defaultMailoption from "../../utils/mail/default-mailoption.js";
 
 export default async (body) => {
-  const user = await User.findOne({ email: body.email });
+  const user = await User.findOne({ email: body.email.toLowerCase() });
   if (user) {
     throw new BadrequestError("User already exists");
   }

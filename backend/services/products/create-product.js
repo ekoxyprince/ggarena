@@ -7,7 +7,7 @@ export default async function createProduct(body, file) {
   const community = await Community.findById(body.community);
   if (!community.isVerified) {
     throw new BadrequestError(
-      "community not verified. please contact GGArena to verify your community."
+      "community not verified. please contact GG Arena ESPORTS to verify your community."
     );
   }
   const image = (await cloudinary.uploadSingleImageToCloudinary(file))

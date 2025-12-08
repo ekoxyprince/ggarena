@@ -18,7 +18,7 @@ function LogoSilder() {
   return (
     <div className="py-[40px] bg-[#0B0816] pb-[70px]">
       <h4 className="text-center text-[20px] bg-text font-semibold">
-        Communities on GG Arena.
+        Communities on GG Arena Esports.
       </h4>
       <div className="mt-[40px] ">
         <Slider
