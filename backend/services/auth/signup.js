@@ -4,11 +4,12 @@ import defaultMailoption from "../../utils/mail/default-mailoption.js";
 
 export default async (body) => {
   const user = await User.findOne({ email: body.email.toLowerCase() });
+  const { email, ...details } = body;
   if (user) {
     throw new BadrequestError("User already exists");
   }
   body.role = "user";
-  const newUser = await User.create(body);
+  const newUser = await User.create({ email: email.toLowerCase(), ...details });
   await defaultMailoption(
     newUser.fullname,
     newUser.email,
